@@ -35,7 +35,7 @@ function ls_shortcode_attractions()
             $ls_attraction_featured_image = get_the_post_thumbnail_url();
 
             // Determine animation based on counter
-            $animation_class = ($counter % 8 <= 4) ? "fadeInLeft" : "fadeInRight";
+            $animation_class = ((($counter - 1) % 8) < 4) ? "fadeInLeft" : "fadeInRight";
 
             // Attractions card shortcode 
             $shortcodes .= '[col span="3" span__sm="12" span__md="6" bg_radius="12" animate="' . $animation_class .  '" depth_hover="3" class="show-radius gradient-blue-col"]';
