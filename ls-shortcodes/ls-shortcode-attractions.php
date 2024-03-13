@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Display Attractions in a card format
  */
@@ -24,27 +23,29 @@ function ls_shortcode_attractions()
         // Opening row shortcode
         $shortcodes = '[row width="custom" custom_width="95%"]';
 
-        while ($query->have_posts()) {
+        while ( $query->have_posts() ) {
+
             $query->the_post();
 
+            // Increment once for each post
             $counter++;
 
             // Declare variables
-            $ls_attraction_title          = get_the_title();
-            $ls_attraction_title = preg_replace('/\s+/', '<br>', $ls_attraction_title);
-            $ls_attraction_featured_image = get_the_post_thumbnail_url();
+            $ls_attraction_title             = get_the_title();
+            $ls_attraction_title             = preg_replace( '/\s+/', '<br>', $ls_attraction_title );
+            $ls_attraction_featured_image    = get_the_post_thumbnail_url();
+            $ls_attraction_short_description = get_field( 'ls_attraction_short_description' );
+            $ls_attraction_learn_more_link   = get_field( 'ls_learn_more_button_link' );
 
-            // Determine animation based on counter
-            $animation_class = ((($counter - 1) % 8) < 4) ? "fadeInLeft" : "fadeInRight";
+            // Determine animation based on counter. 1-4 fadeInLeft, 5-8 fadeInRight
+            $ls_attraction_animation_class = ( ( ($counter - 1 ) % 8 ) < 4 ) ? "fadeInLeft" : "fadeInRight";
 
             // Attractions card shortcode 
-            $shortcodes .= '[col span="3" span__sm="12" span__md="6" bg_radius="12" animate="' . $animation_class .  '" depth_hover="3" class="show-radius gradient-blue-col"]';
-
-            $shortcodes .= '[ux_banner height="300px" bg="607" bg_color="rgba(255, 255, 255, 0)" bg_overlay="rgba(0, 0, 0, 0.4)" hover="zoom"]';
+            $shortcodes .= '[col span="3" span__sm="12" span__md="6" bg_radius="12" animate="' . $ls_attraction_animation_class .  '" depth_hover="3" class="show-radius gradient-blue-col"]';
+            $shortcodes .= '[ux_banner height="300px" bg="' . $ls_attraction_featured_image . '" bg_color="rgba(255, 255, 255, 0)" bg_overlay="rgba(0, 0, 0, 0.4)" hover="zoom"]';
             $shortcodes .= '[text_box position_x="50" position_y="50"]';
             $shortcodes .= '[/text_box]';
             $shortcodes .= '[/ux_banner]';
-
             $shortcodes .= '[row_inner h_align="center"]';
             $shortcodes .= '[col_inner span="8" span__sm="12" margin="-150px 0px 0px 0px"]';
             $shortcodes .= '[ux_banner height="250px" bg="517" bg_color="rgba(255, 255, 255, 0)"]';
@@ -56,11 +57,10 @@ function ls_shortcode_attractions()
             $shortcodes .= '[/ux_banner]';
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[col_inner span="10" span__sm="12" margin="-29px 0px 0px 0px" align="center" color="light"]';
-            $shortcodes .= '<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>';
-            $shortcodes .= '[button text="Learn More" style="link" size="large" class="text-yellow"]';
+            $shortcodes .= '<p>' . $ls_attraction_short_description . '</p>';
+            $shortcodes .= '[button text="Learn More" style="link" size="large" class="text-yellow" link="' . $ls_attraction_learn_more_link . '"]';
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
-
             $shortcodes .= '[/col]';
         }
 
@@ -68,7 +68,7 @@ function ls_shortcode_attractions()
         $shortcodes .= '[/row]';
 
         // Output the shortcodes
-        echo do_shortcode($shortcodes);
+        echo do_shortcode( $shortcodes );
 
         // Clean up
         wp_reset_postdata();
