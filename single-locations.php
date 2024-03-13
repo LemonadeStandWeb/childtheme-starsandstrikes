@@ -99,6 +99,7 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $ls_location_lane_link = get_field( 'ls_locations_reserve_a_lane_link' );
                     $ls_location_hours = get_field( 'ls_locations_hours' );
                     $ls_attraction_availability = get_field( 'ls_attraction_location_availability' );
+                    $current_location = get_the_ID();
 
                     $shortcodes = '';
 
@@ -170,21 +171,19 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $shortcodes .= '[col span__sm="12" bg_radius="12" animate="fadeInUp"]';
                     $shortcodes .= '[ux_stack direction__sm="col" distribute="center" align="center" align__sm="stretch" class="mb-0"]';
 
-                    $current_location = get_the_ID();
-
-                    $args = array(
+                    $attractions_args = array(
                         'post_type' => 'attractions',
                         'posts_per_page' => -1,
                         'meta_query' => array(
                             array(
-                                'key' => 'ls_attraction_location_availability', // name of custom field
-                                'value' => '"' . $current_location . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
+                                'key' => 'ls_attraction_location_availability', 
+                                'value' => '"' . $current_location . '"', 
                                 'compare' => 'LIKE'
                             )
                         )
                     );
 
-                    $attractions_query = new WP_Query( $args );
+                    $attractions_query = new WP_Query( $attractions_args );
 
                     if ( $attractions_query->have_posts() ) {
 
@@ -208,6 +207,8 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                         $shortcodes .= '<p>Please call us to ask about all available attractions!</p>';
                     }
 
+                    wp_reset_postdata();
+                    
                     $shortcodes .= '[/ux_stack]';
 
                     // 'Activities Available' Text
@@ -227,118 +228,75 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
 
                     // Daily Specials
                     $shortcodes .= '[row style="collapse"]';
-
                     $shortcodes .= '[col span__sm="12" padding__sm="0px 10px 0px 10px" padding__md="0px 10px 0px 10px" margin="0px 0px -250px 0px" align="center" color="light" animate="fadeInUp"]';
-
                     $shortcodes .= '<h2>Daily Specials</h2>';
                     $shortcodes .= '[row_inner]';
-
                     $shortcodes .= '[col_inner span__sm="12" padding="30px 30px 30px 30px" align="center" bg_radius="12" color="light" animate="fadeInUp" depth="5" class="gradient-blue-col"]';
 
                     $shortcodes .= '[tabgroup style="pills" nav_size="xlarge" align="center" class="custom-tabs"]';
 
                     $shortcodes .= '[tab title="Sunday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10" color="light"]';
-
                     $shortcodes .= '<p>Sunday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Monday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Monday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Tuesday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Tuesday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Wednesday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Wednesday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Thursday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Thursday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Friday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Friday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
+
                     $shortcodes .= '[tab title="Saturday"]';
-
                     $shortcodes .= '[row_inner_1]';
-
                     $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-
                     $shortcodes .= '<p>Saturday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-
                     $shortcodes .= '[/col_inner_1]';
-
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/tab]';
 
                     $shortcodes .= '[/tabgroup]';
 
                     $shortcodes .= '[/col_inner]';
-
                     $shortcodes .= '[/row_inner]';
-
                     $shortcodes .= '[/col]';
-
                     $shortcodes .= '[/row]';
-
                     $shortcodes .= '[/section]';
                     ?>
 
