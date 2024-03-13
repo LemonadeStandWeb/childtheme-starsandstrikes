@@ -12,7 +12,6 @@ require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-attractio
 require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-promotions.php';
 require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-specials.php';
 
-
 // Disable WordPress Administration email verification prompt 
 add_filter( 'admin_email_check_interval', '__return_false' );
 
