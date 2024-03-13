@@ -399,10 +399,13 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $shortcodes .= '[/section]';
                     ?>
 
-                    <?php the_content(); ?>
+                    <?php 
+                    echo do_shortcode($shortcodes);
+                    the_content(); 
+                    ?>
 
                 <?php endwhile; // end of the loop. 
-                echo do_shortcode($shortcodes);
+                
                 ?>
             </div>
 
