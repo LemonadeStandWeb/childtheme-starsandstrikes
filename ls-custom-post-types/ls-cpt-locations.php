@@ -69,7 +69,7 @@ function ls_create_location_taxonomies() {
 		'show_ui'           => true,
 		'show_admin_column' => true,
 		'query_var'         => true,
-		'rewrite'           => array( 'slug' => 'location_category' ), 
+		'rewrite'           => array( 'slug' => 'locations_category' ), 
 		'show_in_rest' => true,
 	);
 
