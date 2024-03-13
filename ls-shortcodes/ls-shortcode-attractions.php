@@ -21,7 +21,7 @@ function ls_shortcode_attractions()
         $counter = 0;
 
         // Opening row shortcode
-        $shortcodes = '[row width="custom" custom_width="95%"]';
+        $shortcodes = '[row width="custom" custom_width="95%" v_align="equal"]';
 
         while ( $query->have_posts() ) {
 
@@ -62,9 +62,15 @@ function ls_shortcode_attractions()
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
             $shortcodes .= '[/col]';
+
+            // After every 4th post, close the current row and start a new one or else the animation will be off
+            if ( $counter % 4 == 0 && $query->current_post + 1 < $query->post_count ) {
+                // Close the current row and start a new one
+                $shortcodes .= '[/row][row width="custom" custom_width="95%" v_align="equal"]';
+            }
         }
 
-        // Close off row
+        // Close off last row
         $shortcodes .= '[/row]';
 
         // Output the shortcodes
