@@ -28,7 +28,7 @@ function ls_create_attractions() {
 		'rewrite'			  => true,
 		'capability_type'	  => 'post',	
 		'hierarchical'        => false,	
-		'supports'            => array( 'title', 'thumbnail', 'revisions' ),
+		'supports'            => array( 'title', 'thumbnail' ),
 		'taxonomies'		  => array('attraction_type'),
 		'menu_position'       => 6,
 		'exclude_from_search' => false,

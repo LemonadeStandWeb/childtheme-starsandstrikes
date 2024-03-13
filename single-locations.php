@@ -98,6 +98,7 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $ls_location_event_link = get_field( 'ls_locations_plan_an_event_link' );
                     $ls_location_lane_link = get_field( 'ls_locations_reserve_a_lane_link' );
                     $ls_location_hours = get_field( 'ls_locations_hours' );
+                    $ls_attraction_availability = get_field( 'ls_attraction_location_availability' );
 
                     $shortcodes = '';
 
@@ -169,65 +170,43 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $shortcodes .= '[col span__sm="12" bg_radius="12" animate="fadeInUp"]';
                     $shortcodes .= '[ux_stack direction__sm="col" distribute="center" align="center" align__sm="stretch" class="mb-0"]';
 
-                    $ls_attraction_availability = get_field( 'ls_attraction_location_availability' );
+                    $current_location = get_the_ID();
 
-                    
+                    $args = array(
+                        'post_type' => 'attractions',
+                        'posts_per_page' => -1,
+                        'meta_query' => array(
+                            array(
+                                'key' => 'ls_attraction_location_availability', // name of custom field
+                                'value' => '"' . $current_location . '"', // matches exactly "123", not just 123. This prevents a match for "1234"
+                                'compare' => 'LIKE'
+                            )
+                        )
+                    );
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="452" pos="center" tooltip="Arcade Games" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                    $attractions_query = new WP_Query( $args );
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="455" pos="center" tooltip="Bumper Cars" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                    if ( $attractions_query->have_posts() ) {
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="457" pos="center" tooltip="Laser Tag" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                        while ( $attractions_query->have_posts() ) {
+                            $attractions_query->the_post();
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="456" pos="center" tooltip="Escape Room" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                            $ls_attraction_name = get_the_title();
+                            $ls_attraction_icon = get_field( 'ls_attraction_icon' );
+                            $ls_attraction_link = get_the_permalink();
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="453" pos="center" tooltip="Axe Throwing" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                            $shortcodes .= '[row_inner]';
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="471" pos="center" tooltip="Augmented Reality" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                            $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
+                            $shortcodes .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
+                            $shortcodes .= '[/featured_box]';
+                            $shortcodes .= '[/col_inner]';
 
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="458" pos="center" tooltip="Virtual Reality" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
-
-                    $shortcodes .= '[row_inner]';
-                    $shortcodes .= '[col_inner span__sm="12" padding="10px 10px 10px 10px" bg_color="rgba(0, 0, 0, 0.5)" bg_radius="12" class="box-glow"]';
-                    $shortcodes .= '[featured_box img="454" pos="center" tooltip="VIP Bowling" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
-                    $shortcodes .= '[/featured_box]';
-                    $shortcodes .= '[/col_inner]';
-                    $shortcodes .= '[/row_inner]';
+                            $shortcodes .= '[/row_inner]';
+                        }
+                    } else {
+                        $shortcodes .= '<p>Please call us to ask about all available attractions!</p>';
+                    }
 
                     $shortcodes .= '[/ux_stack]';
 
