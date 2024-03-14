@@ -1,83 +1,36 @@
 <?php
 /*
-Template name: Location Page - Full Width - Transparent Header - Light Text
+Template name: Attractions Single
 */ ?>
 
 <!DOCTYPE html>
-<!--[if IE 9 ]> <html <?php language_attributes(); ?> class="ie9 <?php flatsome_html_classes(); ?>"> <![endif]-->
-<!--[if IE 8 ]> <html <?php language_attributes(); ?> class="ie8 <?php flatsome_html_classes(); ?>"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html <?php language_attributes(); ?> class="<?php flatsome_html_classes(); ?>"> <!--<![endif]-->
-
+<html <?php language_attributes(); ?> class="<?php flatsome_html_classes(); ?>">
 <head>
-    <meta charset="<?php bloginfo('charset'); ?>" />
-    <link rel="profile" href="http://gmpg.org/xfn/11" />
-    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-    <?php wp_head(); ?>
+	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 
-    <?php do_action('flatsome_after_body_open'); ?>
-    <?php wp_body_open(); ?>
+<?php do_action( 'flatsome_after_body_open' ); ?>
+<?php wp_body_open(); ?>
 
-    <a class="skip-link screen-reader-text" href="#main"><?php esc_html_e('Skip to content', 'flatsome'); ?></a>
+<a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'flatsome' ); ?></a>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <?php do_action('flatsome_before_header'); ?>
+	<?php do_action( 'flatsome_before_header' ); ?>
 
-        <header id="header" class="header header transparent has-transparent <?php flatsome_header_classes(); ?>">
-            <div class="header-wrapper">
-                <div id="masthead" class="header-main nav-dark toggle-nav-dark <?php header_inner_class('main'); ?>">
-                    <div class="header-inner flex-row container <?php flatsome_logo_position(); ?>" role="navigation">
+	<header id="header" class="header header transparent has-transparent <?php flatsome_header_classes(); ?>">
+		<div class="header-wrapper">
+			<?php get_template_part( 'template-parts/header/header', 'wrapper' ); ?>
+		</div>
+	</header>
 
-                        <!-- Logo -->
-                        <div id="logo" class="flex-col logo">
-                            <?php get_template_part('template-parts/header/partials/element', 'logo'); ?>
-                        </div>
-
-                        <!-- Mobile Left Elements -->
-                        <div class="flex-col show-for-medium flex-left">
-                            <ul class="mobile-nav nav nav-left <?php flatsome_nav_classes('main-mobile'); ?>">
-                                <?php flatsome_header_elements('header_mobile_elements_left', 'mobile'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Left Elements -->
-                        <div class="flex-col hide-for-medium flex-left
-<?php if (get_theme_mod('logo_position', 'left') == 'left') echo 'flex-grow'; ?>">
-                            <ul class="header-nav header-nav-main nav nav-left <?php flatsome_nav_classes('main'); ?>">
-                                <?php flatsome_header_elements('header_elements_left'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Right Elements -->
-                        <div class="flex-col hide-for-medium flex-right">
-                            <ul class="header-nav header-nav-main nav nav-right <?php flatsome_nav_classes('main'); ?>">
-                                <?php flatsome_header_elements('header_elements_right'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Mobile Right Elements -->
-                        <div class="flex-col show-for-medium flex-right">
-                            <ul class="mobile-nav nav nav-right <?php flatsome_nav_classes('main-mobile'); ?>">
-                                <?php flatsome_header_elements('header_mobile_elements_right', 'mobile'); ?>
-                            </ul>
-                        </div>
-
-                    </div><!-- .header-inner -->
-
-                    <?php if (get_theme_mod('header_divider', 1)) { ?>
-                        <!-- Header divider -->
-                        <div class="container">
-                            <div class="top-divider full-width"></div>
-                        </div>
-                    <?php } ?>
-                </div><!-- .header-main -->
-            </div><!-- header-wrapper-->
-        </header>
+	<?php do_action( 'flatsome_after_header' ); ?>
 
         <main id="main" class="<?php flatsome_main_classes(); ?>">
 
