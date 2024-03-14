@@ -163,6 +163,9 @@ Template name: Locations Single
                     // Declare variables
                     $ls_location_name = get_the_title();
                     $ls_location_image = get_the_post_thumbnail_url();
+                    $ls_location_background_video = get_field('ls_locations_background_video');
+                    $ls_location_background_image = get_field('ls_locations_background_image');
+                    $ls_location_notice = get_field('ls_locations_notice');
                     $ls_location_address = esc_attr(get_field('ls_locations_location_address'));
                     $ls_location_phone = get_field('ls_locations_phone_number');
                     $ls_location_phone = preg_replace('/[^0-9]/', '', $ls_location_phone);
@@ -174,7 +177,7 @@ Template name: Locations Single
 
                     $shortcodes = '';
 
-                    $shortcodes .= '[section bg="164" bg_size="original" bg_overlay="rgba(12, 35, 66, 0.797)" padding="100px" video_mp4="/wp-content/uploads/2024/02/placeholder.mp4"]';
+                    $shortcodes .= '[section bg="' . $ls_location_background_image . '" bg_size="original" bg_overlay="rgba(12, 35, 66, 0.797)" padding="100px" video_mp4="' . $ls_location_background_video . '"]';
                     $shortcodes .= '[gap height="164px" height__md="108px"]';
                     $shortcodes .= '[row h_align="center"]';
                     $shortcodes .= '[col span="8" span__sm="12" span__md="10" padding="0px 50px 0px 0px" padding__sm="0px 0px 0px 0px" padding__md="0px 0px 0px 0px" align="left" color="light" animate="fadeInLeft"]';
@@ -241,7 +244,14 @@ Template name: Locations Single
                     $shortcodes .= '[row_inner_1]';
                     $shortcodes .= '[col_inner_1 span__sm="12" padding="20px 20px 10px 20px" align="left" bg_color="#f7d54d"]';
 
-                    $shortcodes .= '[featured_box img="849" img_width="25" pos="left" tooltip="Please note: Due to a private event on February 7th (Wednesday), our center will close to the public at 5pm. We apologize for any invonvenience." icon_color="#f04c36" class="align-icons"]';
+                    $shortcodes .= '[featured_box img="';
+                    if ($ls_location_notice) {
+                        $shortcodes .= '849" img_width="25" pos="left" tooltip="' . $ls_location_notice;
+                    } else {
+                        // If $ls_location_notice is empty, don't add an image
+                        $shortcodes .= '" img_width="25" pos="left';
+                    }
+                    $shortcodes .= '" icon_color="#f04c36" class="align-icons"]';
                     $shortcodes .= '[ux_text text_color="#23201f"]';
                     $shortcodes .= '<h4 class="uppercase mb-0">' . $ls_location_name . '</h4>';
                     $shortcodes .= '[/ux_text]';
