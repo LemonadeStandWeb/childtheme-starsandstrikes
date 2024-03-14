@@ -94,12 +94,15 @@ Template name: Attractions Single
 
             wp_reset_postdata();
 
+            // Close out opening tags
             $shortcodes .= '[/row_inner_1]';
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
             $shortcodes .= '[/col]';
             $shortcodes .= '[/row]';
             $shortcodes .= '[/section]';
+
+            // Display CTA
             $shortcodes .= '[block id="35"]';
             ?>
 
