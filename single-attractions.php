@@ -88,6 +88,10 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                 <?php while (have_posts()) : the_post(); ?>
 
                     <?php
+                    // Capture the content from the editor
+                    ob_start();
+                    the_content();
+                    $content = ob_get_clean();
 
                     // Declare variables
                     $ls_attraction_availability = get_field('ls_attraction_location_availability');
@@ -96,12 +100,13 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     $current_attraction = get_the_ID();
                     $shortcodes = '';
 
-                    $shortcodes .= '[section bg="'. $ls_attraction_image .'" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
+                    // Header 
+                    $shortcodes .= '[section bg="' . $ls_attraction_image . '" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
                     $shortcodes .= '[gap height="155px" height__md="116px"]';
                     $shortcodes .= '[row]';
                     $shortcodes .= '[col span__sm="12" align="center"]';
                     $shortcodes .= '[ux_text font_size="1.85" font_size__sm="1.2" font_size__md="1.6"]';
-                    $shortcodes .= '<h1 class="mb-0 uppercase">'. $ls_attraction_name .'</h1>';
+                    $shortcodes .= '<h1 class="mb-0 uppercase">' . $ls_attraction_name . '</h1>';
                     $shortcodes .= '[/ux_text]';
                     $shortcodes .= '[/col]';
                     $shortcodes .= '[/row]';
@@ -112,13 +117,7 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
 
                     $shortcodes .= '[col span="8" span__sm="12" span__md="10" padding="0px 50px 0px 0px" padding__md="0px 0px 0px 0px"]';
 
-                    $shortcodes .= '[ux_text font_size="1.05" line_height="1.85"]';
-                    $shortcodes .= '<h2>This is a simple headline</h2>';
-                    $shortcodes .= '<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy</p>';
-                    $shortcodes .= '<p>nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat v</p>';
-                    $shortcodes .= '<p>olutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consecte</p>';
-                    $shortcodes .= '<p>tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/ux_text]';
+                    $shortcodes .= $content;
 
                     $shortcodes .= '[/col]';
 
@@ -141,19 +140,20 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
 
                     if ($attractions_query->have_posts()) {
                         while ($attractions_query->have_posts()) {
+                            // Grab post data  
                             $attractions_query->the_post();
                             $attractions_post_link = get_the_permalink();
                             $attractions_post_title = get_the_title();
                             $attractions_post_icon = get_field('ls_attraction_gradient_icon');
                             $attractions_post_image = get_the_post_thumbnail_url();
 
-
+                            // Build out each attraction
                             $shortcodes .= '[col_inner_1 span="6" span__sm="12" span__md="4" padding="20px 0px 20px 0px" bg_color="rgb(59, 45, 116)" class="show-radius clickable-card"]';
-                            $shortcodes .= '[ux_image id="'. $attractions_post_image . '" class="fill"]';
+                            $shortcodes .= '[ux_image id="' . $attractions_post_image . '" class="fill"]';
                             $shortcodes .= '[ux_html]';
                             $shortcodes .= '<a href="' . $attractions_post_link . '" class="clickable-card-link"></a>';
                             $shortcodes .= '[/ux_html]';
-                            $shortcodes .= '[featured_box img="'. $attractions_post_icon .'" inline_svg="0" img_width="40" pos="center"]';
+                            $shortcodes .= '[featured_box img="' . $attractions_post_icon . '" inline_svg="0" img_width="40" pos="center"]';
                             $shortcodes .= '[ux_text font_size="0.9" text_align="center" text_color="rgb(255,255,255)" class="relative"]';
                             $shortcodes .= '<p class="mb-0"><strong>' . $attractions_post_title . '</strong></p>';
                             $shortcodes .= '[/ux_text]';
@@ -165,7 +165,6 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     wp_reset_postdata();
 
                     $shortcodes .= '[/row_inner_1]';
-
                     $shortcodes .= '[/col_inner]';
                     $shortcodes .= '[/row_inner]';
                     $shortcodes .= '[/col]';
@@ -179,7 +178,7 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                     the_content();
                     ?>
 
-                <?php endwhile; // end of the loop. 
+                <?php endwhile;
 
                 ?>
             </div>
