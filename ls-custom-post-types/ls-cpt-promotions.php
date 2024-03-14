@@ -28,7 +28,7 @@ function ls_create_promotions() {
 		'rewrite'			  => true,
 		'capability_type'	  => 'post',	
 		'hierarchical'        => false,	
-		'supports'            => array( 'title', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', 'editor'),
+		'supports'            => array( 'title', 'thumbnail', 'revisions', 'editor'),
 		'taxonomies'		  => array('promotion_type'), // Singular name
 		'menu_position'       => 6,
 		'exclude_from_search' => false,
