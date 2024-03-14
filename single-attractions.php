@@ -144,16 +144,16 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
                             $attractions_query->the_post();
                             $attractions_post_link = get_the_permalink();
                             $attractions_post_title = get_the_title();
-                            $attractions_post_icon = get_field('ls_attraction_icon');
+                            $attractions_post_icon = get_field('ls_attraction_gradient_icon');
                             $attractions_post_image = get_the_post_thumbnail_url();
 
 
                             $shortcodes .= '[col_inner_1 span="6" span__sm="12" span__md="4" padding="20px 0px 20px 0px" bg_color="rgb(59, 45, 116)" class="show-radius clickable-card"]';
-                            $shortcodes .= '[ux_image id="'. $attractions_post_icon . '" class="fill"]';
+                            $shortcodes .= '[ux_image id="'. $attractions_post_image . '" class="fill"]';
                             $shortcodes .= '[ux_html]';
                             $shortcodes .= '<a href="' . $attractions_post_link . '" class="clickable-card-link"></a>';
                             $shortcodes .= '[/ux_html]';
-                            $shortcodes .= '[featured_box img="'. $attractions_post_image .'" inline_svg="0" img_width="40" pos="center"]';
+                            $shortcodes .= '[featured_box img="'. $attractions_post_icon .'" inline_svg="0" img_width="40" pos="center"]';
                             $shortcodes .= '[ux_text font_size="0.9" text_align="center" text_color="rgb(255,255,255)" class="relative"]';
                             $shortcodes .= '<p class="mb-0"><strong>' . $attractions_post_title . '</strong></p>';
                             $shortcodes .= '[/ux_text]';
