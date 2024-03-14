@@ -175,7 +175,6 @@ Template name: Location Page - Full Width - Transparent Header - Light Text
 
                     <?php
                     echo do_shortcode($shortcodes);
-                    the_content();
                     ?>
 
                 <?php endwhile;
