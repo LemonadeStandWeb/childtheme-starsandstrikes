@@ -189,10 +189,10 @@ Template name: Locations Single
 
                     $shortcodes .= '[row_inner style="small"]';
                     $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12"]';
-                    $shortcodes .= '[button text="Book a Party" color="alert" size="large" expand="true"]';
+                    $shortcodes .= '[button text="Book a Party" color="alert" size="large" expand="true" link="' . $ls_location_event_link . '"]';
                     $shortcodes .= '[/col_inner]';
                     $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12"]';
-                    $shortcodes .= '[button text="Reserve a Lane" color="success" size="large" expand="true"]';
+                    $shortcodes .= '[button text="Reserve a Lane" color="success" size="large" expand="true" link="' . $ls_location_lane_link . '"]';
                     $shortcodes .= '[/col_inner]';
                     $shortcodes .= '[/row_inner]';
 
