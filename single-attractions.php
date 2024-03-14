@@ -29,7 +29,7 @@ Template name: Attractions Single
             $current_attraction = get_the_ID();
             $shortcodes = '';
 
-            // Header 
+            // Header Section
             $shortcodes .= '[section bg="' . $ls_attraction_image . '" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
             $shortcodes .= '[gap height="155px" height__md="116px"]';
             $shortcodes .= '[row]';
@@ -41,6 +41,7 @@ Template name: Attractions Single
             $shortcodes .= '[/row]';
             $shortcodes .= '[/section]';
 
+            // Content Section
             $shortcodes .= '[section bg="694" bg_size="original" bg_overlay="rgba(255, 255, 255, 0.291)" bg_pos="81% 0%" padding="80px" padding__md="49px"]';
             $shortcodes .= '[row h_align="center"]';
 
