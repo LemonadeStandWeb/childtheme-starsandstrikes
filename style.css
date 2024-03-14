@@ -1,5 +1,5 @@
 /*
-Theme Name: ChildTheme - Github
+Theme Name: ChildTheme - GitHub
 Description: This is a child theme for Flatsome Theme
 Author: UX Themes
 Template: flatsome
@@ -581,4 +581,40 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 
 .slider .flickity-prev-next-button:hover .arrow, .slider .flickity-prev-next-button:hover svg{
 	fill: white;
+}
+
+/* clickable tile cards */
+
+.clickable-card .clickable-card-link{
+	position: absolute;
+	display: block;
+	width: 100%; /* width and height 100% of the parent container column-inner */
+	height: 100%;
+	top: 0; /* make sure absolute position is in the right place */
+	left: 0;
+	z-index: 99; /* bring link element to the top of the card so it is covering everything else */
+}
+
+.clickable-card .col-inner > .img img{
+	opacity: 0;
+}
+
+.clickable-card .col-inner:hover > .img img{
+	opacity: .7;
+}
+
+.clickable-card > .col-inner:hover *{
+	color: white; /* make all the text inside your hovered card white */
+}
+
+.clickable-card > .col-inner img{
+	transition: .2s ease-in;
+}
+
+.clickable-card > .col-inner:hover .icon img{
+	filter: brightness(0) invert(1);
+}
+
+.clickable-card .icon-box-img{
+	margin-bottom: 5px;
 }

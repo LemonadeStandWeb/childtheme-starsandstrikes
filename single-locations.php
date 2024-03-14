@@ -1,6 +1,6 @@
 <?php
 /*
-Template name: Location Page - Full Width - Transparent Header - Light Text
+Template name: Locations Single
 */ ?>
 
 <!DOCTYPE html>
