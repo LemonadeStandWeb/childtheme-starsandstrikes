@@ -228,7 +228,7 @@ Template name: Locations Single
                             $shortcodes .= '[/col_inner]';
                         }
                     } else {
-                        $shortcodes .= '<p>Please call us to ask about all available attractions!</p>';
+                        $shortcodes .= '[col_inner padding="20px 20px 5px 20px"][ux_text]<p>Please call us to ask about all available attractions!</p>[/ux_text][/col_inner]';
                     }
 
                     wp_reset_postdata();
