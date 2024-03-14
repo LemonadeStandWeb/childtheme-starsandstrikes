@@ -1,16 +1,15 @@
 <?php
-// Add custom Theme Functions here
 
-// Load Custom Post Types
-require_once get_stylesheet_directory() . '/ls-custom-post-types/ls-cpt-attractions.php';
-require_once get_stylesheet_directory() . '/ls-custom-post-types/ls-cpt-locations.php';
-require_once get_stylesheet_directory() . '/ls-custom-post-types/ls-cpt-promotions.php';
-require_once get_stylesheet_directory() . '/ls-custom-post-types/ls-cpt-specials.php';
+// Custom Post Types
+include('inc/ls-custom-post-types/ls-cpt-attractions.php');
+include('inc/ls-custom-post-types/ls-cpt-locations.php');
+include('inc/ls-custom-post-types/ls-cpt-promotions.php');
+include('inc/ls-custom-post-types/ls-cpt-specials.php');
 
-// Load Custom Shortcodes
-require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-attractions.php';
-require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-promotions.php';
-require_once get_stylesheet_directory() . '/ls-shortcodes/ls-shortcode-specials.php';
+// Custom Shortcodes
+include('inc/ls-shortcodes/ls-shortcode-attractions.php');
+include('inc/ls-shortcodes/ls-shortcode-promotions.php');
+include('inc/ls-shortcodes/ls-shortcode-specials.php');
 
 // Disable WordPress Administration email verification prompt 
 add_filter( 'admin_email_check_interval', '__return_false' );

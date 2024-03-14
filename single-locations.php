@@ -30,52 +30,7 @@ Template name: Locations Single
 
         <header id="header" class="header header transparent has-transparent <?php flatsome_header_classes(); ?>">
             <div class="header-wrapper">
-                <div id="masthead" class="header-main nav-dark toggle-nav-dark <?php header_inner_class('main'); ?>">
-                    <div class="header-inner flex-row container <?php flatsome_logo_position(); ?>" role="navigation">
-
-                        <!-- Logo -->
-                        <div id="logo" class="flex-col logo">
-                            <?php get_template_part('template-parts/header/partials/element', 'logo'); ?>
-                        </div>
-
-                        <!-- Mobile Left Elements -->
-                        <div class="flex-col show-for-medium flex-left">
-                            <ul class="mobile-nav nav nav-left <?php flatsome_nav_classes('main-mobile'); ?>">
-                                <?php flatsome_header_elements('header_mobile_elements_left', 'mobile'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Left Elements -->
-                        <div class="flex-col hide-for-medium flex-left
-<?php if (get_theme_mod('logo_position', 'left') == 'left') echo 'flex-grow'; ?>">
-                            <ul class="header-nav header-nav-main nav nav-left <?php flatsome_nav_classes('main'); ?>">
-                                <?php flatsome_header_elements('header_elements_left'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Right Elements -->
-                        <div class="flex-col hide-for-medium flex-right">
-                            <ul class="header-nav header-nav-main nav nav-right <?php flatsome_nav_classes('main'); ?>">
-                                <?php flatsome_header_elements('header_elements_right'); ?>
-                            </ul>
-                        </div>
-
-                        <!-- Mobile Right Elements -->
-                        <div class="flex-col show-for-medium flex-right">
-                            <ul class="mobile-nav nav nav-right <?php flatsome_nav_classes('main-mobile'); ?>">
-                                <?php flatsome_header_elements('header_mobile_elements_right', 'mobile'); ?>
-                            </ul>
-                        </div>
-
-                    </div><!-- .header-inner -->
-
-                    <?php if (get_theme_mod('header_divider', 1)) { ?>
-                        <!-- Header divider -->
-                        <div class="container">
-                            <div class="top-divider full-width"></div>
-                        </div>
-                    <?php } ?>
-                </div><!-- .header-main -->
+                <?php get_template_part('template-parts/header/header', 'main');?>
             </div><!-- header-wrapper-->
         </header>
 
@@ -315,69 +270,13 @@ Template name: Locations Single
                     $shortcodes .= '[ux_text text_color="rgb(255,255,255)"]';
                     $shortcodes .= '<h2>Daily Specials</h2>';
                     $shortcodes .= '[/ux_text]';
+
+                    // Daily Specials would go here
                     $shortcodes .= '[row_inner]';
                     $shortcodes .= '[col_inner span__sm="12" padding="30px 30px 30px 30px" align="center" bg_color="rgb(255,255,255)" bg_radius="12" animate="fadeInUp" depth="5"]';
-                    $shortcodes .= '[tabgroup style="bold" nav_style="normal" nav_size="large" align="center" class="custom-tabs"]';
-
-                    $shortcodes .= '[tab title="Sunday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Sunday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Monday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Monday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Tuesday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Tuesday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Wednesday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Wednesday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Thursday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Thursday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Friday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Friday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[tab title="Saturday"]';
-                    $shortcodes .= '[row_inner_1]';
-                    $shortcodes .= '[col_inner_1 span__sm="12" bg_radius="10"]';
-                    $shortcodes .= '<p>Saturday: Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>';
-                    $shortcodes .= '[/col_inner_1]';
-                    $shortcodes .= '[/row_inner_1]';
-                    $shortcodes .= '[/tab]';
-
-                    $shortcodes .= '[/tabgroup]';
                     $shortcodes .= '[/col_inner]';
                     $shortcodes .= '[/row_inner]';
+
                     $shortcodes .= '[/col]';
                     $shortcodes .= '[/row]';
 
