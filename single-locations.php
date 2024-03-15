@@ -12,80 +12,8 @@ Template name: Locations single.php
     <div id="content" role="main">
 
         <?php while (have_posts()) : the_post(); ?>
-            <style>
-                h1,
-                h2,
-                h3,
-                h4,
-                h5,
-                h6 {
-                    font-family: 'open sans';
-                    text-transform: uppercase;
-                }
-
-                .uppercase {
-                    letter-spacing: -.04em;
-                }
-
-                .icon-box.icon-box-left {
-                    justify-content: center;
-                }
-
-                .icon-box-left .icon-box-text {
-                    flex: unset;
-                }
-
-                /* tabs special styling */
-
-                .custom-tabs .nav {
-                    box-shadow: 5px 5px 10px 0px rgba(42, 42, 48, 0.08), -5px -5px 10px 0px rgba(255, 255, 255, 0.60);
-                    background-color: white;
-                    border-radius: 3px;
-                    display: flex;
-                    flex-direction: row;
-                    padding: 10px;
-                    margin-bottom: 30px;
-                }
-
-                .custom-tabs .nav {
-                    background-color: #efefef;
-                }
-
-                .custom-tabs .nav .tab a {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                }
-
-                @media (max-width: 800px) {
-                    .custom-tabs .nav .tab {
-                        width: 100%;
-                        margin: 0.3em 0em;
-                    }
-                }
-
-                .custom-tabs .nav .tab a {
-                    padding: 10px 20px;
-                    border-radius: 5px;
-                    background-color: #f6f6f8;
-                }
-
-                .custom-tabs .nav .tab a {
-                    background-color: white;
-                }
-
-                .custom-tabs .nav .tab.active a,
-                .custom-tabs .nav .tab a:hover {
-                    background: #f68e3d;
-                    color: white;
-                }
-
-                .custom-tabs.tabbed-content .nav>li {
-                    margin: 0px 5px;
-                }
-            </style>
+            
             <?php
-
             // Declare variables
             $ls_location_name = get_the_title();
             $ls_location_image = get_the_post_thumbnail_url();
@@ -234,20 +162,164 @@ Template name: Locations single.php
             $shortcodes .= '[/row]';
 
             $shortcodes .= '[gap height="0px"]';
-            $shortcodes .= '[gap height="75px"]';
 
-            $shortcodes .= '[row style="collapse"]';
-            $shortcodes .= '[col span__sm="12" padding__sm="0px 10px 0px 10px" padding__md="0px 10px 0px 10px" margin="0px 0px -250px 0px" align="center" animate="fadeInUp"]';
-            $shortcodes .= '[ux_text text_color="rgb(255,255,255)"]';
-            $shortcodes .= '<h2>Daily Specials</h2>';
+            $shortcodes .= '[/section]';
+
+            // Specials Section
+            $shortcodes .= '[section bg="694" bg_size="original" padding="79px"]';
+            $shortcodes .= '[row style="collapse" width="full-width" v_align="middle" h_align="center"]';
+
+            $shortcodes .= '[col span="5" span__sm="12" span__md="10" padding__md="0px 30px 0px 30px" max_width="450px" max_width__md="100%"]';
+            $shortcodes .= '[ux_text font_size="1.4"]';
+            $shortcodes .= '<h2 class="mb-0">Specials</h2>';
             $shortcodes .= '[/ux_text]';
+            $shortcodes .= '[ux_text font_size="1.2"]';
+            $shortcodes .= '<p><strong>Save big when you get away and play.</strong></p>';
+            $shortcodes .= '[/ux_text]';
+            $shortcodes .= '<p>Save on fun at Stars and Strikes. Our specials make it easier than ever to have fun with your friends and family. Click to learn more about each special. We’ll see you soon!</p>';
+            $shortcodes .= '[/col]';
 
-            // Daily Specials would go here
+            $shortcodes .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
+            $shortcodes .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider"]';
+            
             $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" padding="30px 30px 30px 30px" align="center" bg_color="rgb(255,255,255)" bg_radius="12" animate="fadeInUp" depth="5"]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  gradient-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Everyday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Stay N\' Play Combo</h4>';
+            $shortcodes .= '<p>Pick your dish and enjoy a $10 or $20 Arcade Game Card for one low price!</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
 
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  red-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Sunday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Sunday Morning Specials</h4>';
+            $shortcodes .= '<p>Enjoy $1.99 bowling and $1.99 shoe rental from open until noon.</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  red-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Sunday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Sunday Night Half Price Specials</h4>';
+            $shortcodes .= '<p>Half Price Hourly Bowling, Arcade Games, and Attractions from 8pm to Close!</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]'; 
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  maroon-card"]';      
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Monday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]'; 
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';  
+            $shortcodes .= '<h4>Monday Night Bowling</h4>';
+            $shortcodes .= '<p>Enjoy $1.99 bowling and $1.99 shoe rental from open until noon.</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';  
+            $shortcodes .= '[/col_inner_1]';     
+            $shortcodes .= '[/row_inner_1]';    
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  purple-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Tuesday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Unlimited Tuesdays</h4>';
+            $shortcodes .= '<p>Unlimited play lets you play all day! The best part is, you choose the activity to play for one low price.</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  dark-blue-card"]';
+            $shortcodes .= '[ux_html]';       
+            $shortcodes .= '<div class="special-box">Wednesday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';       
+            $shortcodes .= '[row_inner_1]';      
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';       
+            $shortcodes .= '<h4>Half Price Wednesdays</h4>';
+            $shortcodes .= '<p>Enjoy Half Price Bowling, Arcade Games, and Attractions from Open to Close!</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';      
+            $shortcodes .= '[/col_inner_1]'; 
+            $shortcodes .= '[/row_inner_1]';     
+            $shortcodes .= '[/col_inner]';     
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  blue-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Friday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Late Night Fridays</h4>';
+            $shortcodes .= '<p>$16.99 Per Person Unlimited Games of Bowling Special</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+
+            $shortcodes .= '[row_inner]';
+            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  orange-card"]';
+            $shortcodes .= '[ux_html]';
+            $shortcodes .= '<div class="special-box">Saturday Deal</div>';
+            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
+            $shortcodes .= '[/ux_html]';
+            $shortcodes .= '[ux_image id="645"]';
+            $shortcodes .= '[row_inner_1]';
+            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+            $shortcodes .= '<h4>Saturday Night Fridays</h4>';
+            $shortcodes .= '<p>$16.99 Per Person Unlimited Games of Bowling Special</p>';
+            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+            $shortcodes .= '[/col_inner_1]';
+            $shortcodes .= '[/row_inner_1]';
+            $shortcodes .= '[/col_inner]';
+            $shortcodes .= '[/row_inner]';
+        
+            $shortcodes .= '[/ux_slider]';
+        
             $shortcodes .= '[/col]';
             $shortcodes .= '[/row]';
 
