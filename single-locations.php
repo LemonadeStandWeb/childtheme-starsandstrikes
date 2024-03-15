@@ -1,6 +1,6 @@
 <?php
 /*
-Template name: Locations Single
+Template name: Locations single.php
 */ ?>
 
 <?php get_template_part('templates/parts/ls-cpt-header'); ?>
