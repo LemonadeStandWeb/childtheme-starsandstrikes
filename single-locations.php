@@ -27,6 +27,7 @@ Template name: Locations single.php
             $ls_location_lane_link = get_field('ls_locations_reserve_a_lane_link');
             $ls_location_hours = get_field('ls_locations_hours');
             $ls_attraction_availability = get_field('ls_attraction_location_availability');
+            $ls_special_availability = get_field('ls_special_location_availability');
             $current_location = get_the_ID();
 
             $shortcodes = '';
@@ -182,6 +183,38 @@ Template name: Locations single.php
             $shortcodes .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
             $shortcodes .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider"]';
             
+            // Loop through each assigned special to location and display them in the slider
+            $specials_args = array(
+                'post_type' => 'specials',
+                'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key' => 'ls_special_location_availability',
+                        'value' => '"' . $current_location . '"',
+                        'compare' => 'LIKE'
+                    )
+                )
+            );
+
+            $specials_query = new WP_Query($specials_args);
+
+            if ( $specials_query->have_posts() ) {
+
+                while ( $specials_query->have_posts() ) {
+                    $specials_query->the_post();
+
+                    $ls_special_name = get_the_title();
+                    $ls_special_image = get_the_post_thumbnail_url();
+                    $ls_special_description = get_the_content();
+                    $ls_special_link = get_the_permalink();
+
+                    
+
+                }
+            } else {
+                $shortcodes .= '<p>No specials available. Please call us for availability!</p>';
+            }
+
             $shortcodes .= '[row_inner]';
             $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  gradient-card"]';
             $shortcodes .= '[ux_html]';
