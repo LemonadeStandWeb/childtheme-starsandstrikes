@@ -768,3 +768,9 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 .icon-alert .icon-box-text{
 	flex: unset;
 }
+
+
+
+h2{
+	background-color: red;
+}
