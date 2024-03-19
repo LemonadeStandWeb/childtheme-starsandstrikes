@@ -815,3 +815,15 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 .ux-menu.sidebar-menu .ux-menu-link__link{
 	border-bottom-color: #c5c5c5;
 }
+
+
+/* pricing table */
+
+.price-title{
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 10px 10px 0px 0px;
+}
