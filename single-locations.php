@@ -27,8 +27,19 @@ Template name: Locations single.php
             $ls_location_lane_link = get_field('ls_locations_reserve_a_lane_link');
             $ls_location_hours = get_field('ls_locations_hours');
             $ls_attraction_availability = get_field('ls_attraction_location_availability');
-            $ls_special_availability = get_field('ls_special_location_availability');
+            $ls_special_availability = get_field('ls`_specials_locations');
             $current_location = get_the_ID();
+
+            // Assign CSS class based on the day of the week that the special is available. No thursday value at the moment.
+            $ls_css_class_map = array(
+                'sunday' => 'red-card',
+                'monday' => 'maroon-card',
+                'tuesday' => 'purple-card',
+                'wednesday' => 'dark-blue-card',
+                'friday' => 'blue-card',
+                'saturday' => 'orange-card',
+                'everyday' => 'gradient-card'
+            );
 
             $shortcodes = '';
 
@@ -189,7 +200,7 @@ Template name: Locations single.php
                 'posts_per_page' => -1,
                 'meta_query' => array(
                     array(
-                        'key' => 'ls_special_location_availability',
+                        'key' => 'ls_specials_locations',
                         'value' => '"' . $current_location . '"',
                         'compare' => 'LIKE'
                     )
@@ -203,153 +214,33 @@ Template name: Locations single.php
                 while ( $specials_query->have_posts() ) {
                     $specials_query->the_post();
 
-                    $ls_special_name = get_the_title();
                     $ls_special_image = get_the_post_thumbnail_url();
-                    $ls_special_description = get_the_content();
                     $ls_special_link = get_the_permalink();
+                    $ls_specials_what_day = get_field('ls_specials_what_day');
+                    $ls_specials_title = get_field('ls_specials_title');
+                    $ls_specials_short_description = get_field('ls_specials_short_description');
 
-                    
+                    $shortcodes .= '[row_inner]';
+                    $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card ' . $ls_css_class_map[$ls_specials_what_day] . '"]';
+                    $shortcodes .= '[ux_html]';
+                    $shortcodes .= '<div class="special-box">' . $ls_specials_what_day . ' Deal</div>';
+                    $shortcodes .= '<a href="' . $ls_special_link . '" class="clickable-card-link"></a>';
+                    $shortcodes .= '[/ux_html]';
+                    $shortcodes .= '[ux_image id="' . $ls_special_image . '"]';
+                    $shortcodes .= '[row_inner_1]';
+                    $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+                    $shortcodes .= '<h4>' . $ls_specials_title . '</h4>';
+                    $shortcodes .= $ls_specials_short_description;
+                    $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+                    $shortcodes .= '[/col_inner_1]';
+                    $shortcodes .= '[/row_inner_1]';
+                    $shortcodes .= '[/col_inner]';
+                    $shortcodes .= '[/row_inner]';
 
                 }
             } else {
-                $shortcodes .= '<p>No specials available. Please call us for availability!</p>';
+                $shortcodes .= '<p>No specials currently available. Please call us for upcoming specials!</p>';
             }
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  gradient-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Everyday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Stay N\' Play Combo</h4>';
-            $shortcodes .= '<p>Pick your dish and enjoy a $10 or $20 Arcade Game Card for one low price!</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  red-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Sunday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Sunday Morning Specials</h4>';
-            $shortcodes .= '<p>Enjoy $1.99 bowling and $1.99 shoe rental from open until noon.</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  red-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Sunday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Sunday Night Half Price Specials</h4>';
-            $shortcodes .= '<p>Half Price Hourly Bowling, Arcade Games, and Attractions from 8pm to Close!</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]'; 
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  maroon-card"]';      
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Monday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]'; 
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';  
-            $shortcodes .= '<h4>Monday Night Bowling</h4>';
-            $shortcodes .= '<p>Enjoy $1.99 bowling and $1.99 shoe rental from open until noon.</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';  
-            $shortcodes .= '[/col_inner_1]';     
-            $shortcodes .= '[/row_inner_1]';    
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  purple-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Tuesday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Unlimited Tuesdays</h4>';
-            $shortcodes .= '<p>Unlimited play lets you play all day! The best part is, you choose the activity to play for one low price.</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  dark-blue-card"]';
-            $shortcodes .= '[ux_html]';       
-            $shortcodes .= '<div class="special-box">Wednesday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';       
-            $shortcodes .= '[row_inner_1]';      
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';       
-            $shortcodes .= '<h4>Half Price Wednesdays</h4>';
-            $shortcodes .= '<p>Enjoy Half Price Bowling, Arcade Games, and Attractions from Open to Close!</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';      
-            $shortcodes .= '[/col_inner_1]'; 
-            $shortcodes .= '[/row_inner_1]';     
-            $shortcodes .= '[/col_inner]';     
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  blue-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Friday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Late Night Fridays</h4>';
-            $shortcodes .= '<p>$16.99 Per Person Unlimited Games of Bowling Special</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
-
-            $shortcodes .= '[row_inner]';
-            $shortcodes .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card  orange-card"]';
-            $shortcodes .= '[ux_html]';
-            $shortcodes .= '<div class="special-box">Saturday Deal</div>';
-            $shortcodes .= '<a href="/" class="clickable-card-link"></a>';
-            $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="645"]';
-            $shortcodes .= '[row_inner_1]';
-            $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-            $shortcodes .= '<h4>Saturday Night Fridays</h4>';
-            $shortcodes .= '<p>$16.99 Per Person Unlimited Games of Bowling Special</p>';
-            $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-            $shortcodes .= '[/col_inner_1]';
-            $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[/col_inner]';
-            $shortcodes .= '[/row_inner]';
         
             $shortcodes .= '[/ux_slider]';
         
