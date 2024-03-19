@@ -226,7 +226,10 @@ Template name: Locations single.php
                     $shortcodes .= '<div class="special-box">' . $ls_specials_what_day . ' Deal</div>';
                     $shortcodes .= '<a href="' . $ls_special_link . '" class="clickable-card-link"></a>';
                     $shortcodes .= '[/ux_html]';
-                    $shortcodes .= '[ux_image id="' . $ls_special_image . '"]';
+
+                    if ($ls_special_image) {
+                        $shortcodes .= '[ux_image id="' . $ls_special_image . '"]';
+                    }
                     $shortcodes .= '[row_inner_1]';
                     $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
                     $shortcodes .= '<h4>' . $ls_specials_title . '</h4>';
