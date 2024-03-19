@@ -583,8 +583,10 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	fill: white;
 }
 
-/* clickable tile cards */
+/* clickable cards */
 
+
+/* tiles */
 .clickable-card .clickable-card-link, .special-clickable-card .clickable-card-link{
 	position: absolute;
 	display: block;
@@ -595,7 +597,7 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	z-index: 99; /* bring link element to the top of the card so it is covering everything else */
 }
 
-.clickable-card .col-inner > .img img{
+.clickable-card:not(.image-first) .col-inner > .img img{
 	opacity: 0;
 }
 
@@ -619,7 +621,22 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	margin-bottom: 5px;
 }
 
-/* specials cards */
+/* gradient image cards */
+.image-first  .purple-overlay .overlay{
+	background-image: linear-gradient(to right bottom, #2eb6ec, #403379, #7b0634);
+	opacity: .8;
+}
+
+.image-first  .orange-overlay .overlay{
+	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
+	opacity: .8;
+}
+
+.image-first .col-inner:hover .purple-overlay .overlay, .image-first .col-inner:hover .orange-overlay .overlay{
+	opacity: .3;
+}
+
+/* specials cards for slider */
 
 .special-clickable-card > .col-inner:hover *{
 	color: white; 
@@ -769,8 +786,32 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	flex: unset;
 }
 
+/* menu hover */
+.ux-menu.sidebar-menu span {
+	position: relative;
+	overflow: hidden;
+	transition: .2s ease-in-out;
+}
+
+.ux-menu.sidebar-menu span:before {
+	content: url('/wp-content/uploads/2024/03/location-dot-solid-1.svg');
+	display: block;
+	width: 20px;
+	position: absolute;
+	left: -25px;
+	top: 3px;
+	transition: .2s ease-in-out;
+}
+
+.ux-menu.sidebar-menu a:hover span {
+	padding-left: 25px;
+}
+
+.ux-menu.sidebar-menu a:hover span:before {
+	left: 0;
+}
 
 
-h2{
-	background-color: red;
+.ux-menu.sidebar-menu .ux-menu-link__link{
+	border-bottom-color: #c5c5c5;
 }
