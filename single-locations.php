@@ -322,12 +322,19 @@ Template name: Locations single.php
             $shortcodes .= '[/ux_slider]';
             $shortcodes .= '[/col]';
             $shortcodes .= '[/row]';
+
+            ob_start();
+            the_content();
+            $ls_content_shortcode = ob_get_clean();
+            
+            $shortcodes .= $ls_content_shortcode;
             $shortcodes .= '[/section]';
+            $shortcodes .= '[block id="schedule-event"]';
             ?>
 
             <?php
             echo do_shortcode($shortcodes);
-            the_content();
+            //the_content();
             ?>
 
         <?php endwhile; // end of the loop. 
