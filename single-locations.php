@@ -14,35 +14,62 @@ Template name: Locations single.php
         <?php while (have_posts()) : the_post(); ?>
             
             <?php
-            // Declare variables
-            $ls_location_name = get_the_title();
-            $ls_location_image = get_the_post_thumbnail_url();
+            /**
+             * Variables setup
+             * 
+             * Initializing variables to store location details, sanitizing the phone number, and fetching links to book an event or reserve a lane.
+             * 
+             * @var string $ls_location_name             The name of the location
+             * @var string $ls_location_image            The featured image of the location
+             * @var string $ls_location_background_video The background video of the location
+             * @var string $ls_location_background_image The background image of the location for mobile or if no video is available
+             * @var string $ls_location_notice           Tootlip text to be displayed next to the hours table title
+             * @var string $ls_location_address          The address of the location
+             * @var string $ls_location_phone            The phone number of the location
+             * @var string $ls_location_event_link       The link to plan an event form
+             * @var string $ls_location_lane_link        The link to reserve a lane form
+             * @var string $ls_location_hours            The hours of the location
+             * @var string $ls_attraction_availability   The availability of attractions at the location
+             * @var string $ls_special_availability      The availability of specials at the location
+             */
+            $ls_location_name             = get_the_title();
+            $ls_location_image            = get_the_post_thumbnail_url();
             $ls_location_background_video = get_field('ls_locations_background_video');
             $ls_location_background_image = get_field('ls_locations_background_image');
-            $ls_location_notice = get_field('ls_locations_notice');
-            $ls_location_address = esc_attr(get_field('ls_locations_location_address'));
-            $ls_location_phone = get_field('ls_locations_phone_number');
-            $ls_location_phone = preg_replace('/[^0-9]/', '', $ls_location_phone);
-            $ls_location_event_link = get_field('ls_locations_plan_an_event_link');
-            $ls_location_lane_link = get_field('ls_locations_reserve_a_lane_link');
-            $ls_location_hours = get_field('ls_locations_hours');
-            $ls_attraction_availability = get_field('ls_attraction_location_availability');
-            $ls_special_availability = get_field('ls`_specials_locations');
-            $current_location = get_the_ID();
+            $ls_location_notice           = get_field('ls_locations_notice');
+            $ls_location_address          = esc_attr(get_field('ls_locations_location_address'));
+            $ls_location_phone            = get_field('ls_locations_phone_number');
+            $ls_location_phone            = preg_replace('/[^0-9]/', '', $ls_location_phone);
+            $ls_location_event_link       = get_field('ls_locations_plan_an_event_link');
+            $ls_location_lane_link        = get_field('ls_locations_reserve_a_lane_link');
+            $ls_location_hours            = get_field('ls_locations_hours');
+            $ls_attraction_availability   = get_field('ls_attraction_location_availability');
+            $ls_special_availability      = get_field('ls`_specials_locations');
+            $current_location             = get_the_ID();
 
-            // Assign CSS class based on the day of the week that the special is available. No thursday value at the moment.
+            /**
+             * Weekday-to-CSS-Class Map
+             * 
+             * Associative array to map the days of the week to a CSS class for the specials cards.
+             */
             $ls_css_class_map = array(
-                'sunday' => 'red-card',
-                'monday' => 'maroon-card',
-                'tuesday' => 'purple-card',
+                'sunday'    => 'red-card',
+                'monday'    => 'maroon-card',
+                'tuesday'   => 'purple-card',
                 'wednesday' => 'dark-blue-card',
-                'friday' => 'blue-card',
-                'saturday' => 'orange-card',
-                'everyday' => 'gradient-card'
+                'friday'    => 'blue-card',
+                'saturday'  => 'orange-card',
+                'everyday'  => 'gradient-card'
             );
 
+            // Initialize shortcode variable as empty and start building the shortcodes
             $shortcodes = '';
 
+            /**
+             * Begin building hero section
+             * 
+             * The hero section includes the location name, background image or video, and buttons to book an event or reserve a lane.
+             */
             $shortcodes .= '[section bg="' . $ls_location_background_image . '" bg_size="original" bg_overlay="rgba(12, 35, 66, 0.797)" padding="100px" video_mp4="' . $ls_location_background_video . '"]';
             $shortcodes .= '[gap height="164px" height__md="108px"]';
             $shortcodes .= '[row h_align="center"]';
@@ -50,9 +77,7 @@ Template name: Locations single.php
             $shortcodes .= '[ux_text font_size="2.4" font_size__sm="1.15"]';
             $shortcodes .= '<h1 class="mb-0 uppercase">' . $ls_location_name . '</h1>';
             $shortcodes .= '[/ux_text]';
-
             $shortcodes .= '[gap height="20px"]';
-
             $shortcodes .= '[row_inner style="small"]';
             $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12"]';
             $shortcodes .= '[button text="Book a Party" color="alert" size="large" expand="true" link="' . $ls_location_event_link . '"]';
@@ -61,6 +86,13 @@ Template name: Locations single.php
             $shortcodes .= '[button text="Reserve a Lane" color="success" size="large" expand="true" link="' . $ls_location_lane_link . '"]';
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
+
+            /**
+             * Attractions Query
+             * 
+             * Fetches and displays all attractions available at the current location by looping through the
+             * 'attractions' custom post type and displaying the title, icon, and link to the attraction.
+             */
 
             $shortcodes .= '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
             $shortcodes .= '[row_inner col_bg="rgba(0, 0, 0, 0.5)" col_bg_radius="5"]';
@@ -77,28 +109,35 @@ Template name: Locations single.php
                 )
             );
 
+            // The query to fetch attractions
             $attractions_query = new WP_Query($attractions_args);
 
+            // Begin building the attractions section if any attractions are available at the location
             if ($attractions_query->have_posts()) {
 
                 while ($attractions_query->have_posts()) {
                     $attractions_query->the_post();
 
+                    // Fetch attraction details
                     $ls_attraction_name = get_the_title();
                     $ls_attraction_icon = get_field('ls_attraction_icon');
                     $ls_attraction_link = get_the_permalink();
 
+                    // Build the attraction shortcode
                     $shortcodes .= '[col_inner span="3" span__sm="6"]';
                     $shortcodes .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
                     $shortcodes .= '[/featured_box]';
                     $shortcodes .= '[/col_inner]';
                 }
             } else {
+                // Display a message if no attractions are available at the location
                 $shortcodes .= '[col_inner padding="20px 20px 5px 20px"][ux_text]<p>Please call us to ask about all available attractions!</p>[/ux_text][/col_inner]';
             }
 
+            // Reset the post data after the attractions loop
             wp_reset_postdata();
 
+            // Close the attractions part of the shortcode
             $shortcodes .= '[/row_inner]';
             $shortcodes .= '[/col]';
 
