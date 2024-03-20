@@ -24,6 +24,7 @@ Template name: Specials single.php
              * @var string $ls_specials_end_time           Time Picker   The time the special ends
              * @var string $ls_specials_title              Text          The title of the special
              * @var string $ls_specials_short_description  Text          The short description of the special
+             * @var string $ls_specials_background_image                 The hero image of the special
              * @var string $ls_specials_the_content                      The editor content of the special
              */
 
@@ -33,6 +34,7 @@ Template name: Specials single.php
             $ls_specials_end_time          = get_field( 'ls_specials_end_time' );
             $ls_specials_title             = get_field( 'ls_specials_title' );
             $ls_specials_short_description = get_field( 'ls_specials_short_description' );
+            $ls_specials_background_image  = get_the_post_thumbnail_url();
             $ls_specials_the_content       = '';
 
             $shortcodes = '';
