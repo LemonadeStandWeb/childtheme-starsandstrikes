@@ -20,17 +20,19 @@ Template name: Promotions single.php
              * 
              * @var array  $ls_promotions_locations          Relationship  The locations where the promotion is available
              * @var string $ls_promotions_title              Text          The title of the special
+             * @var string $ls_promotions_hero_image                       The hero image of the promotion
              * @var string $ls_promotions_the_content                      The editor content of the promotion
              */
 
             $ls_promotions_locations         = get_field( 'ls_promotions_locations' );
             $ls_promotions_title             = get_the_title();
+            $ls_promotions_hero_image        = get_the_post_thumbnail_url();
             $ls_promotions_the_content       = '';
 
             $shortcodes = '';
 
             // Build the hero section shortcodes
-            $shortcodes .= '[section bg="645" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
+            $shortcodes .= '[section bg="' . $ls_promotions_hero_image . '" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
             $shortcodes .= '[gap height="155px" height__md="116px"]';
             $shortcodes .= '[row]';
             $shortcodes .= '[col span__sm="12" align="center"]';
