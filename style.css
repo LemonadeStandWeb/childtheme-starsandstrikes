@@ -827,3 +827,10 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	padding: 5px 15px;
 	border-radius: 10px 10px 0px 0px;
 }
+
+
+/* purple button */
+
+.purple-button{
+	background-color: #3f3a7e;
+}
