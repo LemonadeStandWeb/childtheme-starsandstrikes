@@ -19,18 +19,18 @@ Template name: Locations single.php
             * 
             * Initializing variables to store location details, sanitizing the phone number, and fetching links to book an event or reserve a lane.
             * 
-            * @var string  $ls_location_name              Text field          The name of the location. 
-            * @var int     $ls_location_image             Image ID            The featured image of the location. 
-            * @var string  $ls_location_background_video  Text field          The background video URL of the location. 
-            * @var int     $ls_location_background_image  Image ID            The background image of the location for mobile or if no video is available. 
-            * @var string  $ls_location_notice            Text field          Tooltip text to be displayed next to the hours table title. 
-            * @var string  $ls_location_address           URL field           The address of the location. 
-            * @var int     $ls_location_phone             Number field        The phone number of the location. 
-            * @var string  $ls_location_event_link        Text field          The link to plan an event form. 
-            * @var string  $ls_location_lane_link         Text field          The link to reserve a lane form. 
-            * @var array   $ls_location_hours             Repeater field      The hours of the location. 
-            * @var array   $ls_attraction_availability    Relationship field  The availability of attractions at the location. 
-            * @var array   $ls_special_availability       Relationship field  The availability of specials at the location.
+            * @var string  $ls_location_name              Text          The name of the location. 
+            * @var int     $ls_location_image             Image ID      The featured image of the location. 
+            * @var string  $ls_location_background_video  Text          The background video URL of the location. 
+            * @var int     $ls_location_background_image  Image ID      The background image of the location for mobile or if no video is available. 
+            * @var string  $ls_location_notice            Text          The Tooltip text to be displayed next to the hours table title. 
+            * @var string  $ls_location_address           URL           The address of the location. 
+            * @var int     $ls_location_phone             Number        The phone number of the location. 
+            * @var string  $ls_location_event_link        Text          The link to plan an event form. 
+            * @var string  $ls_location_lane_link         Text          The link to reserve a lane form. 
+            * @var array   $ls_location_hours             Repeater      The hours of the location. 
+            * @var array   $ls_attraction_availability    Relationship  The availability of attractions at the location. 
+            * @var array   $ls_special_availability       Relationship  The availability of specials at the location.
             */
             $ls_location_name             = get_the_title();
             $ls_location_image            = get_the_post_thumbnail_url();
