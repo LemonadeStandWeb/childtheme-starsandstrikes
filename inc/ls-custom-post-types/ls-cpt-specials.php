@@ -28,7 +28,7 @@ function ls_create_specials() {
 		'rewrite'			  => true,
 		'capability_type'	  => 'post',	
 		'hierarchical'        => false,	
-		'supports'            => array( 'title', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', 'editor'),
+		'supports'            => array( 'title', 'thumbnail', 'revisions', 'page-attributes', 'editor'),
 		'taxonomies'		  => array('special_type'), 
 		'menu_position'       => 6,
 		'exclude_from_search' => false,
