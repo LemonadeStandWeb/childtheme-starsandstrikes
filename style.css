@@ -744,7 +744,7 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	background-image: linear-gradient(to right bottom, #2eb6ec, #403379, #7b0634);
 }
 
-.special-clickable-card .col-inner > .row .col-inner{
+.slider .special-clickable-card .col-inner > .row .col-inner{
 	min-height: 250px;
 	display: inline-flex;
 	flex-direction: column;
