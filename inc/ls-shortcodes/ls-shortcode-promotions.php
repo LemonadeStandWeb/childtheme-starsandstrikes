@@ -46,6 +46,11 @@ function ls_shortcode_promotions()
             // Build the promotion shortcode
             $shortcodes .= '[col span="4" span__sm="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_css_class_map[$ls_promotions_card_color] . '"]';
             $shortcodes .= '[ux_html]';
+            if ($ls_promotions_short_title) {
+                $ls_promotions_short_title = $ls_promotions_short_title;
+            } else {
+                $ls_promotions_short_title = 'Promotion';
+            }
             $shortcodes .= '<div class="special-box">' . $ls_promotions_short_title . '</div>';
             $shortcodes .= '<a href="' . $ls_promotions_link . '" class="clickable-card-link"></a>';
             $shortcodes .= '[/ux_html]';
@@ -54,7 +59,7 @@ function ls_shortcode_promotions()
             if ($ls_promotions_image) {
                 $shortcodes .= '[ux_image id="' . $ls_promotions_image . '"]';
             }
-            
+
             $shortcodes .= '[row_inner]';
             $shortcodes .= '[col_inner span__sm="12" padding="30px 30px 0px 30px"]';
             $shortcodes .= '<h4>' . $ls_promotions_title . '</h4>';
