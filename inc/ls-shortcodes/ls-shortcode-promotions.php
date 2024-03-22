@@ -43,13 +43,22 @@ function ls_shortcode_promotions()
             $ls_promotions_short_description = get_field('ls_promotions_short_description');
             $ls_promotions_card_color        = get_field('ls_promotions_card_color');
 
+            $ls_promotions_card_class = array_key_exists($ls_promotions_card_color, $ls_css_class_map) && !empty($ls_css_class_map[$ls_promotions_card_color])
+              ? $ls_css_class_map[$ls_promotions_card_color]
+              : 'blue-card'; // Default class
+
             // Build the promotion shortcode
-            $shortcodes .= '[col span="4" span__sm="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_css_class_map[$ls_promotions_card_color] . '"]';
+            $shortcodes .= '[col span="4" span__sm="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_promotions_card_class . '"]';
             $shortcodes .= '[ux_html]';
+
             if ($ls_promotions_short_title) {
+
                 $ls_promotions_short_title = $ls_promotions_short_title;
+
             } else {
+
                 $ls_promotions_short_title = 'Promotion';
+
             }
             $shortcodes .= '<div class="special-box">' . $ls_promotions_short_title . '</div>';
             $shortcodes .= '<a href="' . $ls_promotions_link . '" class="clickable-card-link"></a>';
