@@ -66,7 +66,7 @@ function ls_shortcode_promotions()
 
             // Fetch the featured image and display if available
             if ($ls_promotions_image) {
-                $shortcodes .= '[ux_image id="' . $ls_promotions_image . '"]';
+                $shortcodes .= '[ux_image id="' . $ls_promotions_image . '" height="67%"]';
             }
 
             $shortcodes .= '[row_inner]';
