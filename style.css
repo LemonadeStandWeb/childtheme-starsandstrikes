@@ -89,10 +89,6 @@ Version: 3.0
 	color: var(--ltyellow) !important;
 }
 
-.tabbed-content .nav>li {
-    margin: 0 25px;
-}
-
 .text-yellow{
 	color: var(--ltyellow) !important;
 }
@@ -142,11 +138,11 @@ Version: 3.0
     max-height: 150px;
 }
 
-.header.transparent:not(.stuck) .nav-left, .header .stuck .nav-left{
+.header:not(.stuck) .nav-left, .header .stuck .nav-left{
 	justify-content: flex-end;
 }
 
-.header.transparent:not(.stuck) .nav-right, .header .stuck .nav-right{
+.header:not(.stuck) .nav-right, .header .stuck .nav-right{
 	justify-content: flex-start;
 }
 
@@ -833,4 +829,33 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 
 .purple-button{
 	background-color: #3f3a7e;
+}
+
+
+
+/* food menu tabs */
+
+.food-menu .nav{
+	background-color: #050d32;
+}
+
+.food-menu li a{
+	font-family: 'Zilla Slab' !important;
+	font-size: 1.2em;
+	color: white;
+	justify-content: center;
+}
+
+.food-menu li a span{
+	line-height: 1em;
+	text-align: center;
+	padding: 15px;
+}
+
+.food-menu li{
+	border: none !important;
+}
+
+.google-maps{
+	padding-bottom: 44%;
 }
