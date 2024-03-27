@@ -289,7 +289,7 @@ p.lead{
 
 .google-maps {
   position: relative;
-  padding-bottom: 64%;
+  padding-bottom: 44%;
   height: 0;
   width:  100%;
   overflow: hidden;
@@ -477,6 +477,10 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	
 	.header.transparent:not(.stuck) #logo img {
 		max-height: 100px;
+	}
+
+	.google-maps {
+		padding-bottom: 54%;
 	}
 }
 
@@ -846,16 +850,101 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 	justify-content: center;
 }
 
+.food-menu li{
+	border: none !important;
+	padding-bottom: 10px;
+}
+
+.food-menu .nav:before{
+	content: url('/wp-content/uploads/2024/03/great-bites_1.svg');
+	width: 80%;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	
+}
+
 .food-menu li a span{
 	line-height: 1em;
 	text-align: center;
-	padding: 15px;
+	padding: 13px 15px;
+	position: relative;
+	overflow: hidden;
+	transition: .2s ease-in;
 }
 
-.food-menu li{
-	border: none !important;
+.food-menu li span:before{
+	width: 23px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translate(-23px, -50%);
+	transition: .2s ease-in;
 }
 
-.google-maps{
-	padding-bottom: 44%;
+.food-menu li a:hover span:before, .food-menu .nav-pills>li.active>a span:before{
+	transform: translate(0px, -50%);
+}
+
+.food-menu li a:hover span, .food-menu .nav-pills>li.active>a span{
+	padding-left: 30px;
+}
+
+.food-menu .nav-pills>li.active>a{
+	background-color: #f68e3d;
+}
+
+.food-menu .nav-pills>li>a:hover{
+	background-color: #2692c9;
+	color: white;
+}
+
+.food-menu .nav-pills>li>a{
+	border-radius: 10px;
+	max-width: 80%;
+	margin: auto;
+}
+
+.food-menu li:nth-child(1) span:before{
+	content:url('/wp-content/uploads/2024/03/french-fries-solid-1.svg');
+}
+
+.food-menu li:nth-child(2) span:before{
+	content:url('/wp-content/uploads/2024/03/drumstick-bite-solid-1.svg');
+}
+
+.food-menu li:nth-child(3) span:before{
+	content:url('/wp-content/uploads/2024/03/pizza-slice-solid-1.svg');
+}
+
+.food-menu li:nth-child(4) span:before{
+	content:url('/wp-content/uploads/2024/03/burger-soda-solid-1.svg');
+}
+
+.food-menu li:nth-child(5) span:before{
+	content:url('/wp-content/uploads/2024/03/grill-hot-solid-1.svg');
+}
+
+.food-menu li:nth-child(6) span:before{
+	content:url('/wp-content/uploads/2024/03/sandwich-solid-1.svg');
+}
+
+.food-menu li:nth-child(7) span:before{
+	content:url('/wp-content/uploads/2024/03/salad-solid-1.svg');
+}
+
+.food-menu li:nth-child(8) span:before{
+	content:url('/wp-content/uploads/2024/03/french-fries-solid-1.svg');
+}
+
+.food-menu li:nth-child(9) span:before{
+	content:url('/wp-content/uploads/2024/03/french-fries-solid-1.svg');
+}
+
+.food-menu li:nth-child(10) span:before{
+	content:url('/wp-content/uploads/2024/03/soft-serve-solid-1.svg');
+}
+
+.food-menu li:nth-child(11) span:before{
+	content:url('/wp-content/uploads/2024/03/glass-citrus-solid-1.svg');
 }
