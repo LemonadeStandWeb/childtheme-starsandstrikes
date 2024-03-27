@@ -887,11 +887,11 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 }
 
 .food-menu li:nth-child(8) span:before{
-	content:url('/wp-content/uploads/2024/03/french-fries-solid-1.svg');
+	content:url('/wp-content/uploads/2024/03/plate-utensils-solid-2.svg');
 }
 
 .food-menu li:nth-child(9) span:before{
-	content:url('/wp-content/uploads/2024/03/french-fries-solid-1.svg');
+	content:url('/wp-content/uploads/2024/03/burger-cheese-solid.svg');
 }
 
 .food-menu li:nth-child(10) span:before{
