@@ -901,3 +901,8 @@ ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:befo
 .food-menu li:nth-child(11) span:before{
 	content:url('/wp-content/uploads/2024/03/glass-citrus-solid-1.svg');
 }
+
+.food-menu .tab-panels{
+	background-image: url('/wp-content/uploads/2024/01/background-pattern-2.webp');
+	background-repeat: repeat-y
+}
