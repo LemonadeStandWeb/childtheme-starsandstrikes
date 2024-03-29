@@ -345,9 +345,10 @@ Template name: Locations single.php
             $shortcodes .= '[row h_align="center"]';
             $shortcodes .= '[col span="8" span__sm="12" span__md="10" padding="0px 50px 0px 0px" padding__sm="0px 0px 0px 0px" padding__md="0px 0px 0px 0px" align="left" color="light" animate="fadeInLeft"]';
 
-            $shortcodes .= '[ux_text font_size="2.4" font_size__sm="1.15"]';
+            $shortcodes .= '[ux_text font_size="1.8" font_size__md="1.5" font_size__sm="1.15"]';
             $shortcodes .= '<h1 class="mb-0 uppercase">' . $ls_location_name . '</h1>';
             $shortcodes .= '[/ux_text]';
+            
             $shortcodes .= '[gap height="20px"]';
 
             $shortcodes .= '[row_inner style="small"]';
