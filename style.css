@@ -311,7 +311,11 @@ p.lead{
 
 /* change the color of bullets. Set your colors at the top */
 ul li.bullet-checkmark:before, ul li.bullet-arrow:before, ul li.bullet-star:before{
-	color: var(--primary);
+	color: var(--red);
+}
+
+ul li.bullet-checkmark{
+	border-bottom: none;
 }
 
 /* gravity forms */
