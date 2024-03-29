@@ -40,7 +40,7 @@ Template name: Specials single.php
             $shortcodes = '';
 
             // Build the hero section shortcodes
-            $shortcodes .= '[section bg="645" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
+            $shortcodes .= '[section bg="' . $ls_specials_background_image . '" bg_size="original" bg_color="#1c457a" bg_overlay="rgba(0,0,0,.5)" dark="true" padding="125px" padding__sm="57px" divider="triangle-invert" divider_height="90px" divider_height__sm="40px" divider_height__md="60px" divider_fill="#fcfbfc"]';
             $shortcodes .= '[gap height="155px" height__md="116px"]';
             $shortcodes .= '[row]';
             $shortcodes .= '[col span__sm="12" align="center"]';
