@@ -578,6 +578,21 @@ ul li.bullet-checkmark{
 	margin-bottom: 5px;
 }
 
+/* activities cards */
+.special-clickable-card.attraction-card > .col-inner:hover{
+	background-color: #403379 !important; /* on hover, change your card color to a new color */
+}
+
+.attraction-card .attraction-button{
+	align-self: center !important;
+	margin-bottom: -25px !important;
+	background-color: white;
+}
+
+.attraction-card > .col-inner:hover .attraction-button{
+	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
+}
+
 /* gradient image cards */
 .image-first  .purple-overlay .overlay{
 	background-image: linear-gradient(to right bottom, #2eb6ec, #403379, #7b0634);
