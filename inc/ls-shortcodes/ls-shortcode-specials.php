@@ -59,7 +59,7 @@ function ls_shortcode_specials()
             $shortcodes .= '[row_inner_1]';
             $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
             $shortcodes .= '<h4>' . $ls_specials_title . '</h4>';
-            $shortcodes .= $ls_specials_short_description;
+            $shortcodes .= '<p>' . $ls_specials_short_description . '</p>';
             $shortcodes .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
             $shortcodes .= '[/col_inner_1]';
             $shortcodes .= '[/row_inner_1]';
