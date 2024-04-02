@@ -34,10 +34,11 @@ function ls_shortcode_attractions()
             $ls_attraction_featured_image    = get_the_post_thumbnail_url();
             $ls_attraction_short_description = get_field('ls_attraction_short_description');
             $ls_attraction_learn_more_link   = get_field('ls_learn_more_button_link');
+            $ls_attraction_post_link         = get_the_permalink();
 
             $shortcodes .= '[col_inner span="4" span__sm="12" span__md="6" margin="0px 0px 50px 0px" margin__sm="0px 0px 30px 0px" margin__md="0px 0px 40px 0px" bg_color="rgb(255,255,255)" class="special-clickable-card attraction-card"]';
             $shortcodes .= '[ux_html]';
-            $shortcodes .= '<a class="clickable-card-link" href="' . $ls_attraction_learn_more_link . '"></a>';
+            $shortcodes .= '<a class="clickable-card-link" href="' . $ls_attraction_post_link . '"></a>';
             $shortcodes .= '[/ux_html]';
             $shortcodes .= '[ux_image id="' . $ls_attraction_featured_image . '" height="75%" class="mb-0"]';
             $shortcodes .= '[row_inner_1]';
