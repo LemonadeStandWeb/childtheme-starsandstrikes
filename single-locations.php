@@ -388,9 +388,29 @@ Template name: Locations single.php
             $shortcodes .= '<p>Save on fun at Stars and Strikes. Our specials make it easier than ever to have fun with your friends and family. Click to learn more about each special. We’ll see you soon!</p>';
             $shortcodes .= '[/col]';
 
+            $shortcodes .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
+            $shortcodes .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
+      
+            // Loop through each assigned special to location and display them in the slider
+            $specials_args = array(
+                'post_type' => 'specials',
+                'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key' => 'ls_specials_locations',
+                        'value' => '"' . $current_location . '"',
+                        'compare' => 'LIKE'
+                    )
+                )
+            );
+
+            $specials_query = new WP_Query($specials_args);
+
+            if ( $specials_query->have_posts() ) {
+              
             // Display specials section content slider
             $shortcodes .= ls_display_specials($current_location, $ls_css_class_map);
-
+              
             // Close row that contains the specials content and slider
             $shortcodes .= '[/row]';
 
