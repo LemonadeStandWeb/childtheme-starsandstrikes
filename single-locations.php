@@ -25,7 +25,7 @@ Template name: Locations single.php
 
                 $output = '';
                 $output .= '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
-                $output .= '[row_inner col_bg="rgba(0, 0, 0, 0.5)" col_bg_radius="5"]';
+                $output .= '[row_inner class="location-activity-tiles"]';
 
                 $attractions_args = array(
                     'post_type' => 'attractions',
@@ -56,7 +56,7 @@ Template name: Locations single.php
 
                         // Build the attraction shortcode
                         $output .= '[col_inner span="3" span__sm="6"]';
-                        $output .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple"]';
+                        $output .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple" link="/replace-me"]';
                         $output .= '[/featured_box]';
                         $output .= '[/col_inner]';
                     }
