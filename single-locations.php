@@ -247,7 +247,7 @@ Template name: Locations single.php
 
                         // Add the special image if available
                         if ($ls_special_image) {
-                            $output .= '[ux_image id="' . $ls_special_image . '"]';
+                            $output .= '[ux_image id="' . $ls_special_image . '" height="67%"]';
                         }
                         $output .= '[row_inner_1]';
                         $output .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
