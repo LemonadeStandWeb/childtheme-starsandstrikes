@@ -51,7 +51,7 @@ Template name: Attractions Single
             $shortcodes .= '[/col]';
 
             // Sticky column to the right
-            $shortcodes .= '[col span="4" span__sm="12" span__md="10" sticky="true"]';
+            $shortcodes .= '[col span="4" span__sm="12" span__md="10" sticky="true" sticky_mode="javascript"]';
             $shortcodes .= '[row_inner]';
             $shortcodes .= '[col_inner span__sm="12" padding="30px 30px 20px 30px" bg_color="#f0f0f0" bg_radius="10"]';
 
