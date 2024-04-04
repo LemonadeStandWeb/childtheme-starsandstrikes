@@ -51,12 +51,11 @@ Template name: Locations single.php
                         // Fetch attraction details
                         $ls_attraction_icon = get_field('ls_attraction_icon');
                         $ls_attraction_name = get_the_title();
-
-                        //$ls_attraction_link = get_the_permalink();
+                        $ls_attraction_link = get_the_permalink();
 
                         // Build the attraction shortcode
                         $output .= '[col_inner span="3" span__sm="6"]';
-                        $output .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple" link="/replace-me"]';
+                        $output .= '[featured_box img="' . $ls_attraction_icon . '" pos="center" tooltip="' . $ls_attraction_name . '" font_size="xsmall" icon_color="rgb(247, 213, 77)" class="simple" link="' . $ls_attraction_link . '"]';
                         $output .= '[/featured_box]';
                         $output .= '[/col_inner]';
                     }
@@ -140,15 +139,12 @@ Template name: Locations single.php
                 $output .= '[row_inner_1]';
                 $output .= '[col_inner_1 span__sm="12" padding="20px 20px 10px 20px" align="left" bg_color="#f7d54d"]';
 
-                // Display icon and tooltip if notice is available
-                $output .= '[featured_box img="';
-                if ($location_notice) {
-                    $output .= '849" img_width="25" pos="left" tooltip="' . $location_notice;
+                if($location_notice){
+                    $output .= '[featured_box img="849" img_width="25" pos="left" tooltip="' . $location_notice . '" icon_color="#f04c36" class="align-icons icon-alert"]';
                 } else {
-                    // If $location_notice is empty, don't add an image
-                    $output .= '" img_width="25" pos="left';
+                    $output .= '[featured_box img_width="25" pos="left" icon_color="#f04c36" class="align-icons icon-alert"]';
                 }
-                $output .= '" icon_color="#f04c36" class="align-icons"]';
+
                 $output .= '[ux_text text_color="#23201f"]';
 
                 if ($location_name) {
@@ -190,6 +186,66 @@ Template name: Locations single.php
                 $output .= '[/col]';
 
                 return $output;
+            }
+
+            /**
+             * Displays the first returned promotion for a given location.
+             *
+             * @param string $location The location to fetch the promotion for.
+             * @return string The shortcode output of the first returned promotion.
+             */
+            function ls_display_featured_promotion($location)
+            {
+
+                $promotions_args = array(
+                    'post_type' => 'promotions',
+                    'posts_per_page' => 1,
+                    'meta_query' => array(
+                        array(
+                            'key' => 'ls_promotions_locations',
+                            'value' => '"' . $location . '"',
+                            'compare' => 'LIKE'
+                        )
+                    )
+                );
+
+                $promotions_query = new WP_Query($promotions_args);
+
+                if ($promotions_query->have_posts()) {
+                    $promotions_query->the_post();
+
+                    // Fetch promotion details
+                    $ls_promotions_image = get_the_post_thumbnail_url();
+                    $ls_promotions_link = get_the_permalink();
+                    $ls_promotions_title = get_field('ls_promotions_title');
+                    $ls_promotions_short_description = get_field('ls_promotions_short_description');
+
+                    $output = '';
+                    $output .= '[row h_align="center"]';
+                    $output .= '[col span__sm="12" span__md="10" margin="-125px 0px 125px 0px" margin__sm="-125px 0px 76px 0px" bg_color="rgb(255,255,255)" bg_radius="10" depth="5" class="show-radius"]';
+                    
+                    $output .= '[row_inner style="collapse" v_align="equal" h_align="center"]';
+                    $output .= '[col_inner span="4" span__sm="12" span__md="12" force_first="medium" padding="0px 0px 0px 0px" padding__md="200px 0px 0px 0px"]';
+                    $output .= '[ux_image id="' . $ls_promotions_image . '" class="fill"]';
+                    $output .= '[/col_inner]';
+                    $output .= '[col_inner span="8" span__sm="12" span__md="12" force_first="medium"]';
+                    $output .= '[ux_image id="693" image_size="original" image_overlay="rgba(255, 255, 255, 0.314)" class="fill"]';
+                    $output .= '[row_inner_1 h_align="center"]';
+                    $output .= '[col_inner_1 span="10" padding="0px 50px 0px 0px" padding__md="0px 0px 0px 0px"]';
+                    $output .= '[gap]';
+                    $output .= '<h2>' . $ls_promotions_title . '</h2>';
+                    $output .= '<p>' . $ls_promotions_short_description . '</p>';
+                    $output .= '[button text="Learn More" color="alert" radius="3" expand="0" link="' . $ls_promotions_link . '"]';
+                    $output .= '[/col_inner_1]';
+                    $output .= '[/row_inner_1]';
+                    $output .= '[/col_inner]';
+                    $output .= '[/row_inner]';
+
+                    $output .= '[/col]';
+                    $output .= '[/row]';
+
+                    return $output;
+                }
             }
 
             /**
@@ -298,6 +354,7 @@ Template name: Locations single.php
                 'monday'    => 'maroon-card',
                 'tuesday'   => 'purple-card',
                 'wednesday' => 'dark-blue-card',
+                'thursday'  => 'red-card',
                 'friday'    => 'blue-card',
                 'saturday'  => 'orange-card',
                 'everyday'  => 'gradient-card'
@@ -348,7 +405,7 @@ Template name: Locations single.php
             $shortcodes .= '[ux_text font_size="1.8" font_size__md="1.5" font_size__sm="1.15"]';
             $shortcodes .= '<h1 class="mb-0 uppercase">' . $ls_location_name . '</h1>';
             $shortcodes .= '[/ux_text]';
-            
+
             $shortcodes .= '[gap height="20px"]';
 
             $shortcodes .= '[row_inner style="small"]';
@@ -375,6 +432,7 @@ Template name: Locations single.php
 
             // Begin building the 'Specials' section
             $shortcodes .= '[section bg="694" bg_size="original" padding="79px"]';
+            $shortcodes .= ls_display_featured_promotion($current_location);
             $shortcodes .= '[row style="collapse" width="full-width" v_align="middle" h_align="center"]';
 
             // Column that displays the 'Specials' section title and description
