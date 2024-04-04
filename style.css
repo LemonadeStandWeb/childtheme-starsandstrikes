@@ -965,5 +965,7 @@ ul li.bullet-checkmark{
 
 .food-menu .tab-panels, .background-repeat{
 	background-image: url('/wp-content/uploads/2024/01/background-pattern-2.webp');
-	background-repeat: repeat-y
+	background-size: cover;
+	background-position: 50% 0%;
+	background-repeat: repeat-y;
 }
