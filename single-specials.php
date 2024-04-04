@@ -52,7 +52,7 @@ Template name: Specials single.php
             $shortcodes .= '[/section]';
 
             // Build the specials section shortcodes
-            $shortcodes .= '[section bg="694" bg_size="original" bg_overlay="rgba(255, 255, 255, 0.291)" bg_pos="81% 0%" padding="80px" padding__md="49px"]';
+            $shortcodes .= '[section class="background-repeat" bg_overlay="rgba(255, 255, 255, 0.291)" padding="80px" padding__md="49px"]';
             $shortcodes .= '[row h_align="center"]';
 
             // Fetch the post content and display within the column

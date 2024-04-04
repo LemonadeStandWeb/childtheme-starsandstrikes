@@ -963,7 +963,7 @@ ul li.bullet-checkmark{
 	content:url('/wp-content/uploads/2024/03/glass-citrus-solid-1.svg');
 }
 
-.food-menu .tab-panels{
+.food-menu .tab-panels, .background-repeat{
 	background-image: url('/wp-content/uploads/2024/01/background-pattern-2.webp');
 	background-repeat: repeat-y
 }
