@@ -788,6 +788,44 @@ ul li.bullet-checkmark{
 	border-bottom-color: #c5c5c5;
 }
 
+/* location activities */
+
+.location-activity-tiles a{
+	background-color: rgba(0, 0, 0, 0.5);
+	display: block;
+	border-radius: 5px;
+	transition: .2s ease-in-out;
+
+}
+
+.location-activity-tiles a:before{
+	content: '';
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
+	border-radius: 5px;
+	transition: .2s ease-in-out;
+	opacity: 0;
+	border: 2px solid transparent;
+}
+
+.location-activity-tiles a:hover:before{
+	opacity: 1;
+	border-color: white;
+}
+
+.location-activity-tiles a:hover svg path{
+	fill: white;
+}
+
+.locations-template-default .section-title-bold .section-title-main{
+	border-color: rgba(255,255,255,.1)
+} 
+
 
 /* pricing table */
 
