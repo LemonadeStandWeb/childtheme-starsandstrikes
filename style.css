@@ -593,6 +593,10 @@ ul li.bullet-checkmark{
 	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
 }
 
+.attraction-card .col-inner .row{
+	align-self: center;
+}
+
 /* gradient image cards */
 .image-first  .purple-overlay .overlay{
 	background-image: linear-gradient(to right bottom, #2eb6ec, #403379, #7b0634);
