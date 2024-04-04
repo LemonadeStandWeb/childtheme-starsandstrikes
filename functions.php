@@ -8,6 +8,7 @@ include('inc/ls-custom-post-types/ls-cpt-specials.php');
 
 // Custom Shortcodes
 include('inc/ls-shortcodes/ls-shortcode-attractions.php');
+include('inc/ls-shortcodes/ls-shortcode-locations.php');
 include('inc/ls-shortcodes/ls-shortcode-promotions.php');
 include('inc/ls-shortcodes/ls-shortcode-specials.php');
 

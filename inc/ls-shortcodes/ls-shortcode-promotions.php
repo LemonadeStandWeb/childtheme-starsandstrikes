@@ -24,7 +24,7 @@ function ls_shortcode_promotions()
 
     $ls_shortcode_promotions_args = array(
         'post_type'      => 'promotions',
-        'posts_per_page' => -1,
+        'posts_per_page' => 12,
     );
 
     $ls_shortcode_promotions_query = new WP_Query($ls_shortcode_promotions_args);

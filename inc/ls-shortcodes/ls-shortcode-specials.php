@@ -15,6 +15,7 @@ function ls_shortcode_specials()
         'monday'    => 'maroon-card',
         'tuesday'   => 'purple-card',
         'wednesday' => 'dark-blue-card',
+        'thursday'  => 'red-card',
         'friday'    => 'blue-card',
         'saturday'  => 'orange-card',
         'everyday'  => 'gradient-card'
@@ -24,7 +25,7 @@ function ls_shortcode_specials()
 
     $ls_shortcode_specials_args = array(
         'post_type'      => 'specials',
-        'posts_per_page' => -1,
+        'posts_per_page' => 12,
     );
 
     $ls_shortcode_specials_query = new WP_Query($ls_shortcode_specials_args);
