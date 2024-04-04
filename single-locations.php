@@ -431,7 +431,7 @@ Template name: Locations single.php
 
 
             // Begin building the 'Specials' section
-            $shortcodes .= '[section bg="694" bg_size="original" padding="79px"]';
+            $shortcodes .= '[section padding="79px" class="background-repeat"]';
             $shortcodes .= ls_display_featured_promotion($current_location);
             $shortcodes .= '[row style="collapse" width="full-width" v_align="middle" h_align="center"]';
 
