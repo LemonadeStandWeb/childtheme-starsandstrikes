@@ -31,23 +31,27 @@ function ls_shortcode_locations()
             // Declare variables
             $ls_location_title             = get_the_title();
             $ls_location_post_link         = get_the_permalink();
+            $ls_location_building_image    = get_field('ls_locations_building_image');
 
             $shortcodes .= '[col_inner span="4" span__sm="12" span__md="6" margin="0px 0px 50px 0px" margin__sm="0px 0px 30px 0px" margin__md="0px 0px 40px 0px" bg_color="rgb(255,255,255)" class="special-clickable-card attraction-card"]';
             $shortcodes .= '[ux_html]';
             $shortcodes .= '<a class="clickable-card-link" href="' . $ls_location_post_link . '"></a>';
             $shortcodes .= '[/ux_html]';
-            $shortcodes .= '[ux_image id="2137" height="75%" class="mb-0"]';
+
+            if($ls_location_building_image) {
+                $shortcodes .= '[ux_image id="'. $ls_location_building_image .'" height="75%" class="mb-0"]';
+            } else {
+                $shortcodes .= '[ux_image id="700" height="75%" class="mb-0"]';
+            }
+            
             $shortcodes .= '[row_inner_1]';
             $shortcodes .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px" align="center"]';
             $shortcodes .= '[ux_text font_size="1.4"]';
             $shortcodes .= '<h4>' . $ls_location_title . '</h4>';
             $shortcodes .= '[/ux_text]';
-            $shortcodes .= '[ux_text font_size="0.9"]';
-            $shortcodes .= '<p>lorem ipsum dolor sit amet</p>';
-            $shortcodes .= '[/ux_text]';
             $shortcodes .= '[/col_inner_1]';
             $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[button text="View Location" color="alert" style="outline" padding="5px 30px 5px 30px" expand="0" icon="icon-angle-right" class="attraction-button"]';
+            $shortcodes .= '[button text="Location Details" color="alert" style="outline" padding="5px 30px 5px 30px" expand="0" icon="icon-angle-right" class="attraction-button"]';
             $shortcodes .= '[/col_inner]';
         }
 
