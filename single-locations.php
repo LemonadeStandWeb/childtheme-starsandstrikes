@@ -378,20 +378,20 @@ Template name: Locations single.php
              * @var array   $ls_attraction_availability    Relationship  The availability of attractions at the location. 
              * @var array   $ls_special_availability       Relationship  The availability of specials at the location.
              */
-            $ls_location_name             = get_the_title();
-            $ls_location_image            = get_the_post_thumbnail_url();
-            $ls_location_background_video = get_field('ls_locations_background_video');
-            $ls_location_background_image = get_field('ls_locations_background_image');
-            $ls_location_notice           = get_field('ls_locations_notice');
-            $ls_location_address          = esc_attr(get_field('ls_locations_location_address'));
-            $ls_location_phone            = get_field('ls_locations_phone_number');
-            $ls_location_phone            = preg_replace('/[^0-9]/', '', $ls_location_phone);
-            $ls_location_event_link       = get_field('ls_locations_plan_an_event_link');
-            $ls_location_lane_link        = get_field('ls_locations_reserve_a_lane_link');
-            $ls_location_hours            = get_field('ls_locations_hours');
-            $ls_attraction_availability   = get_field('ls_attraction_location_availability');
-            $ls_special_availability      = get_field('ls_specials_locations');
-            $current_location             = get_the_ID();
+            $ls_location_name               = get_the_title();
+            $ls_location_image              = get_the_post_thumbnail_url();
+            $ls_location_background_video   = get_field('ls_locations_background_video');
+            $ls_location_background_image   = get_field('ls_locations_background_image');
+            $ls_location_notice             = get_field('ls_locations_notice');
+            $ls_location_address_share_link = esc_attr(get_field('ls_locations_location_address_share_link'));
+            $ls_location_phone              = get_field('ls_locations_phone_number');
+            $ls_location_phone              = preg_replace('/[^0-9]/', '', $ls_location_phone);
+            $ls_location_event_link         = get_field('ls_locations_plan_an_event_link');
+            $ls_location_lane_link          = get_field('ls_locations_reserve_a_lane_link');
+            $ls_location_hours              = get_field('ls_locations_hours');
+            $ls_attraction_availability     = get_field('ls_attraction_location_availability');
+            $ls_special_availability        = get_field('ls_specials_locations');
+            $current_location               = get_the_ID();
 
             // Initialize shortcode variable as empty and start building the shortcodes
             $shortcodes = '';
@@ -422,7 +422,7 @@ Template name: Locations single.php
             // Close the column containing location name, buttons, and attractions
             $shortcodes .= '[/col]';
 
-            $shortcodes .= ls_display_hours_column($ls_location_notice, $ls_location_name, $ls_location_address, $ls_location_phone);
+            $shortcodes .= ls_display_hours_column($ls_location_notice, $ls_location_name, $ls_location_address_share_link, $ls_location_phone);
 
             // Close the hero section
             $shortcodes .= '[/row]';

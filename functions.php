@@ -185,3 +185,9 @@ function activities_handler($atts, $content = null, $tag = '' ) {
 }
 
 add_shortcode('activities', 'activities_handler');
+
+// ACF Google Maps API Key
+function my_acf_init() {
+    acf_update_setting('google_api_key', 'AIzaSyAecK7qTZsCl3jFfeArITGzAA_dm_a0bhI');
+}
+add_action('acf/init', 'my_acf_init');
