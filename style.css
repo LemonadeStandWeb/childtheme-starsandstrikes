@@ -598,19 +598,46 @@ ul li.bullet-checkmark{
 }
 
 /* gradient image cards */
-.image-first  .purple-overlay .overlay{
+.image-first.purple-overlay .img .overlay{
 	background-image: linear-gradient(to right bottom, #2eb6ec, #403379, #7b0634);
 	opacity: .8;
 }
 
-.image-first  .orange-overlay .overlay{
+.image-first.orange-overlay .img .overlay{
 	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
 	opacity: .8;
 }
 
-.image-first .col-inner:hover .purple-overlay .overlay, .image-first .col-inner:hover .orange-overlay .overlay{
-	opacity: .3;
+.clickable-card.image-first > .col-inner .img{
+	transition: .3s ease-in-out;
 }
+
+.clickable-card.image-first > .col-inner .img{
+	height: 210px;
+}
+
+.image-first.purple-overlay > .col-inner:hover{
+	background-color: #403379 !important; /* on hover, change your card color to a new color */
+}
+
+.image-first.orange-overlay > .col-inner:hover{
+	background-color: #F04C36 !important;
+}
+
+.image-first > .col-inner{
+	border: 2px solid transparent;
+	transition: .2s ease-in;
+}
+
+.image-first > .col-inner:hover{
+	border-color: white;
+}
+
+.clickable-card.clickable-card.image-first > .col-inner:hover .img{
+	height: 100%;
+	opacity: .5;
+}
+
 
 /* specials cards for slider */
 
@@ -968,4 +995,54 @@ ul li.bullet-checkmark{
 	background-size: cover;
 	background-position: 50% 0%;
 	background-repeat: repeat-y;
+}
+
+/* super menu styles */
+
+.super-menu-link{
+	background-color: rgba(255, 255, 255, .15);
+	border-radius: 10px;
+	padding: 5px 30px;
+	margin-bottom: 10px;
+	transition: .2s ease-in-out;
+	overflow: hidden;
+	position: relative;
+	border: 2px transparent solid;
+}
+
+.super-menu-link:before{
+	content: '';
+	background-image: linear-gradient(90deg, #2eb6ec, #403379);
+	position: absolute;
+	top: 0;
+	right: 100%;
+	width: 150%;
+	height: 100%;
+	z-index: -1;
+	transition: .2s ease-in-out;
+}
+
+a:hover .super-menu-link{
+	background-color: transparent;
+	border-color: white;
+}
+
+a:hover .super-menu-link:before{
+	animation: move-gradient 3s infinite; 
+}
+
+header .has-dropdown a:hover {
+	opacity: 1 !important;
+}
+
+@keyframes move-gradient{
+	0%{
+		right: 0;
+	}
+	50%{
+		right: -50%;
+	}
+	100%{
+		right: 0;
+	}
 }
