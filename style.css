@@ -526,6 +526,20 @@ ul li.bullet-checkmark{
 	transform: scale(1.1);
 }
 
+.special-clickable-card .col-inner > .row {
+	flex-grow: 1;
+}
+
+
+.special-clickable-card .col-inner > .row .col, .special-clickable-card .col-inner {
+	display: flex;
+	flex-direction: column;
+}
+
+.special-clickable-card .col-inner > .row .col .col-inner a{
+	margin-top: auto;
+}
+
 .specials-slider .flickity-slider>:not(.is-selected){
 	opacity: 1;
 }
