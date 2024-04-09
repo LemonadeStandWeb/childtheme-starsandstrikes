@@ -78,6 +78,18 @@ Version: 3.0
 	backdrop-filter: none !important;
 }
 
+.header.transparent:not(.stuck) .nav-top-link{
+	color: var(--ltblue);
+}
+
+.header.transparent:not(.stuck) .nav-top-link:hover{
+	color: var(--ltyellow);
+}
+
+.header.transparent:not(.stuck) .active .nav-top-link{
+	color: var(--ltyellow);
+}
+
 .select-button {
 	font-size: 42px;
 	font-family: 'Zilla Slab';
