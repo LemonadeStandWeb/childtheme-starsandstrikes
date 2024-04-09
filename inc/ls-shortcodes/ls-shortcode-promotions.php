@@ -52,7 +52,7 @@ function ls_shortcode_promotions()
                 : 'blue-card';
 
             // Build the promotion shortcode
-            $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_promotions_card_class . '"]';
+            $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_promotions_card_class . '" margin="0px 0px 30px 0px"]';
             $shortcodes .= '[ux_html]';
 
             if ($ls_promotions_short_title) {
