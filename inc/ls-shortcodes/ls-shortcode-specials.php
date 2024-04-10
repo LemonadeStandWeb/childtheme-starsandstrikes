@@ -46,7 +46,7 @@ function ls_shortcode_specials()
             $ls_specials_short_description = get_field('ls_specials_short_description');
 
             // Build the promotion shortcode
-            $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_css_class_map[$ls_specials_what_day] . '"]';
+            $shortcodes .= '[col_inner span="4" span__sm="12" span__md="12" bg_color="rgb(255,255,255)" animate="fadeInUp" class="special-clickable-card ' . $ls_css_class_map[$ls_specials_what_day] . '" margin="0px 0px 30px 0px"]';
             $shortcodes .= '[ux_html]';
             $shortcodes .= '<div class="special-box">' . $ls_specials_what_day . ' Deal</div>';
             $shortcodes .= '<a href="' . $ls_special_link . '" class="clickable-card-link"></a>';

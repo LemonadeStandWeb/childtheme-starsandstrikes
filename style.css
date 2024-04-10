@@ -78,6 +78,18 @@ Version: 3.0
 	backdrop-filter: none !important;
 }
 
+.header.transparent:not(.stuck) .nav-top-link{
+	color: var(--ltblue);
+}
+
+.header.transparent:not(.stuck) .nav-top-link:hover{
+	color: var(--ltyellow);
+}
+
+.header.transparent:not(.stuck) .active .nav-top-link{
+	color: var(--ltyellow);
+}
+
 .select-button {
 	font-size: 42px;
 	font-family: 'Zilla Slab';
@@ -512,6 +524,20 @@ ul li.bullet-checkmark{
 
 .special-clickable-card > .col-inner:hover img{
 	transform: scale(1.1);
+}
+
+.special-clickable-card .col-inner > .row {
+	flex-grow: 1;
+}
+
+
+.special-clickable-card .col-inner > .row .col, .special-clickable-card .col-inner {
+	display: flex;
+	flex-direction: column;
+}
+
+.special-clickable-card .col-inner > .row .col .col-inner a{
+	margin-top: auto;
 }
 
 .specials-slider .flickity-slider>:not(.is-selected){
