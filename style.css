@@ -933,3 +933,7 @@ header .has-dropdown a:hover {
 		right: 0;
 	}
 }
+
+header .row-divided>.col+.col:not(.large-12){
+	border-color: hsla(0,0%,100%,.15);
+}
