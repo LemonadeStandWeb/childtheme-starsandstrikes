@@ -262,6 +262,8 @@ Template name: Locations single.php
             function ls_display_specials($location, $css_class_map)
             {
 
+                global $ls_index_days_map;
+
                 $output = '';
                 $output .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
                 $output .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
@@ -278,13 +280,40 @@ Template name: Locations single.php
                     )
                 );
 
-                // The query to fetch specials
                 $specials_query = new WP_Query($specials_args);
+
+                $specials_array = [];
 
                 if ($specials_query->have_posts()) {
 
                     while ($specials_query->have_posts()) {
+
                         $specials_query->the_post();
+
+                        // Make the post data available
+                        global $post;
+
+                        // Map each day of the week to its corresponding sort index
+                        $ls_specials_what_day = get_field('ls_specials_what_day');
+                        $sort_index = $ls_index_days_map[$ls_specials_what_day];
+
+                        // Build an array of specials with their sort index
+                        $specials_array[] = array(
+                            'post' => $post,
+                            'sort_index' => $sort_index
+                        );
+                    }
+
+                    // Sort the specials array by the sort index
+                    usort($specials_array, function ($a, $b) {
+                        return $a['sort_index'] <=> $b['sort_index'];
+                    });
+
+                    // Loop through the sorted specials array and build the shortcode
+                    foreach ($specials_array as $special) {
+
+                        $post = $special['post'];
+                        setup_postdata($post);
 
                         // Fetch special details
                         $ls_special_image = get_the_post_thumbnail_url();
@@ -358,6 +387,22 @@ Template name: Locations single.php
                 'friday'    => 'blue-card',
                 'saturday'  => 'orange-card',
                 'everyday'  => 'gradient-card'
+            );
+
+            /**
+             * Weekday-to-Index Map
+             * 
+             * Associative array to map the days of the week to an index for sorting specials.
+             */
+            $ls_index_days_map = array(
+                'sunday'    => 0,
+                'monday'    => 1,
+                'tuesday'   => 2,
+                'wednesday' => 3,
+                'thursday'  => 4,
+                'friday'    => 5,
+                'saturday'  => 6,
+                'everyday'  => 7
             );
 
             /**
