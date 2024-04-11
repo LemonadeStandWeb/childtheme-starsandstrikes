@@ -15,7 +15,7 @@ function ls_shortcode_specials()
         'monday'    => 'maroon-card',
         'tuesday'   => 'purple-card',
         'wednesday' => 'dark-blue-card',
-        'thursday'  => 'red-card',
+        'thursday'  => 'yellow-card',
         'friday'    => 'blue-card',
         'saturday'  => 'orange-card',
         'everyday'  => 'gradient-card'
