@@ -73,7 +73,7 @@ function ls_shortcode_locations()
 
             $shortcodes .= '[/col_inner_1]';
             $shortcodes .= '[/row_inner_1]';
-            $shortcodes .= '[button text="Location Details" color="alert" style="outline" padding="5px 30px 5px 30px" expand="0" icon="icon-angle-right" class="attraction-button"]';
+            $shortcodes .= '[button text="Location Details" link="' . $ls_location_post_link . '" color="alert" style="outline" padding="5px 30px 5px 30px" expand="0" icon="icon-angle-right" class="attraction-button"]';
             $shortcodes .= '[/col_inner]';
         }
 
