@@ -15,14 +15,19 @@ Template name: Locations single.php
 
             <?php
             /**
-             * Builds and returns the query arguments to fetch attractions based on location.
+             * Displays the attractions available at the current location.
              *
              * @param string $location the ID of the current location.
-             * @return array The query arguments for fetching attractions.
+             * @return string The shortcode output of the attractions section.
              */
-            function ls_attractions_query_args(string $location): array
+            function ls_display_attractions($location)
             {
-                return array(
+
+                $output = '';
+                $output .= '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
+                $output .= '[row_inner class="location-activity-tiles"]';
+
+                $attractions_args = array(
                     'post_type' => 'attractions',
                     'posts_per_page' => -1,
                     'meta_query' => array(
@@ -33,23 +38,9 @@ Template name: Locations single.php
                         )
                     )
                 );
-            }
-
-            /**
-             * Displays the attractions available at the current location.
-             *
-             * @param string $location the ID of the current location.
-             * @return string The shortcode output of the attractions section.
-             */
-            function ls_display_attractions(string $location): string
-            {
-
-                // Opening title and 'Activities Available' row
-                $output = '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
-                $output .= '[row_inner class="location-activity-tiles"]';
 
                 // The query to fetch attractions
-                $attractions_query = new WP_Query(ls_attractions_query_args($location));
+                $attractions_query = new WP_Query($attractions_args);
 
                 // Begin building the attractions section if any attractions are available at the location.
                 if ($attractions_query->have_posts()) {
@@ -83,13 +74,16 @@ Template name: Locations single.php
             }
 
             /**
-             * Displays the hours table for a location.
+             * Displays the daily hours of operation table for locations.
+             * 
+             * The hours table is built by looping through the repeater field 'ls_locations_hours' and displaying the day and hours.
              *
-             * @return string The shortcode output of the hours table.
+             * @return string The shortcodes for the hours table.
              */
-            function ls_display_hours_table(): string
+            function ls_display_hours_table()
             {
-                $output = '<table class="hours__table">';
+                $output = '';
+                $output .= '<table class="hours__table">';
                 $output .= '<tbody>';
 
                 // Display Hours Table
@@ -131,9 +125,9 @@ Template name: Locations single.php
              * @param string $location_name The name of the location.
              * @param string $location_address The address of the location.
              * @param string $location_phone The phone number of the location.
-             * @return string The shortcode output for the 'hours' column.
+             * @return string The shortcode output for the hours column.
              */
-            function ls_display_hours_column(string $location_notice, string $location_name, string $location_address, string $location_phone): string
+            function ls_display_hours_column($location_notice, $location_name, $location_address, $location_phone)
             {
                 $output = '';
                 // Opening 4 column
@@ -195,13 +189,15 @@ Template name: Locations single.php
             }
 
             /**
-             * Builds and returns the query arguments to fetch a single promotion
+             * Displays the first returned promotion for a given location.
              *
-             * @param string $location The ID of the current location.
-             * @return array The query arguments for fetching a single promotion
+             * @param string $location The location to fetch the promotion for.
+             * @return string The shortcode output of the first returned promotion.
              */
-            function ls_promotions_query_args(string $location): array{
-                return array(
+            function ls_display_featured_promotion($location)
+            {
+
+                $promotions_args = array(
                     'post_type' => 'promotions',
                     'posts_per_page' => 1,
                     'meta_query' => array(
@@ -212,18 +208,8 @@ Template name: Locations single.php
                         )
                     )
                 );
-            }
 
-            /**
-             * Displays the first returned promotion for a given location.
-             *
-             * @param string $location The location to fetch the promotion for.
-             * @return string The shortcode output of the first returned promotion.
-             */
-            function ls_display_featured_promotion(string $location): string
-            {
-
-                $promotions_query = new WP_Query(ls_promotions_query_args($location));
+                $promotions_query = new WP_Query($promotions_args);
 
                 if ($promotions_query->have_posts()) {
                     $promotions_query->the_post();
@@ -234,7 +220,8 @@ Template name: Locations single.php
                     $ls_promotions_title = get_field('ls_promotions_title');
                     $ls_promotions_short_description = get_field('ls_promotions_short_description');
 
-                    $output = '[row h_align="center"]';
+                    $output = '';
+                    $output .= '[row h_align="center"]';
                     $output .= '[col span__sm="12" span__md="10" margin="-125px 0px 125px 0px" margin__sm="-125px 0px 76px 0px" bg_color="rgb(255,255,255)" bg_radius="10" depth="5" class="show-radius"]';
                     
                     $output .= '[row_inner style="collapse" v_align="equal" h_align="center"]';
@@ -258,19 +245,30 @@ Template name: Locations single.php
                     $output .= '[/row]';
 
                     return $output;
-                } else {
-                    return '';
                 }
             }
 
             /**
-             * Builds and returns the query arguments for fetching specials available at the given location.
+             * Displays all specials available at the current location.
              *
-             * @param string $location The ID of the current location.
-             * @return array The query arguments for fetching specials.
+             * This function fetches and displays all specials available at the current location by looping through the 'specials' custom post type.
+             * It retrieves the title, image, and short description of each special and builds a shortcode to display them.
+             * If no specials are available at the location, it displays a message.
+             *
+             * @param string $location The current location.
+             * @param array $css_class_map The CSS class map for the specials.
+             * @return string The shortcode output of the specials.
              */
-            function ls_specials_query_args(string $location): array {
-                return array(
+            function ls_display_specials($location, $css_class_map)
+            {
+
+                global $ls_index_days_map;
+
+                $output = '';
+                $output .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
+                $output .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
+
+                $specials_args = array(
                     'post_type' => 'specials',
                     'posts_per_page' => -1,
                     'meta_query' => array(
@@ -281,118 +279,8 @@ Template name: Locations single.php
                         )
                     )
                 );
-            }
 
-            /**
-             * Sorts the specials array based on the 'sort_index' value in ascending order.
-             *
-             * @param array $specials_array An array of specials.
-             * @return array The sorted array of specials.
-             */
-            function ls_sort_specials(array $specials_array): array {
-                usort($specials_array, function ($a, $b) {
-                    return $a['sort_index'] <=> $b['sort_index'];
-                });
-                return $specials_array;
-            }
-
-            /**
-             * Generates the shortcode for displaying specials.
-             *
-             * @param array $specials The array of specials to be displayed.
-             * @param array $css_class_map The mapping of CSS classes for each day of the week.
-             * @return string The shortcode output for the specials section.
-             */
-            function getSpecialsShortcodes(array $specials, array $css_class_map): string {
-
-                $output = '';
-                // Loop through the sorted specials array and build the shortcode
-                foreach ($specials as $special) {
-
-                    $post = $special['post'];
-                    setup_postdata($post);
-
-                    // Fetch special details
-                    $ls_special_image = get_the_post_thumbnail_url();
-                    $ls_special_link = get_the_permalink();
-                    $ls_specials_what_day = get_field('ls_specials_what_day');
-                    $ls_specials_title = get_field('ls_specials_title');
-                    $ls_specials_short_description = get_field('ls_specials_short_description');
-
-                    // Build the special shortcode
-                    $output .= '[row_inner]';
-                    $output .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card ' . $css_class_map[$ls_specials_what_day] . '"]';
-                    $output .= '[ux_html]';
-                    $output .= '<div class="special-box">' . $ls_specials_what_day . ' Deal</div>';
-                    $output .= '<a href="' . $ls_special_link . '" class="clickable-card-link"></a>';
-                    $output .= '[/ux_html]';
-
-                    // Add the special image if available
-                    if ($ls_special_image) {
-                        $output .= '[ux_image id="' . $ls_special_image . '" height="67%"]';
-                    }
-                    $output .= '[row_inner_1]';
-                    $output .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-                    $output .= '<h4>' . $ls_specials_title . '</h4>';
-                    $output .= $ls_specials_short_description;
-                    $output .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-                    $output .= '[/col_inner_1]';
-                    $output .= '[/row_inner_1]';
-                    $output .= '[/col_inner]';
-                    $output .= '[/row_inner]';
-                }
-                return $output;
-            }
-
-            /**
-             * Returns the default output if no specials are available.
-             *
-             * @param array $css_class_map The mapping of CSS classes for each day of the week.
-             * @return string The default shortcode output.
-             */
-            function getDefaultOutput(array $css_class_map): string {
-                $output = '';
-
-                // Build the special shortcode
-                $output .= '[row_inner]';
-                $output .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card ' . $css_class_map['monday'] . '"]';
-                $output .= '[ux_html]';
-                $output .= '<div class="special-box">Coming Soon!</div>';
-                $output .= '<a href="/contact" class="clickable-card-link"></a>';
-                $output .= '[/ux_html]';
-
-                $output .= '[ux_image id="645"]';
-                $output .= '[row_inner_1]';
-                $output .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
-                $output .= '<h4>Lorem Ipsum</h4>';
-                $output .= '<p>No specials available. Please contact us for availability!</p>';
-                $output .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
-                $output .= '[/col_inner_1]';
-                $output .= '[/row_inner_1]';
-                $output .= '[/col_inner]';
-                $output .= '[/row_inner]';
-
-                return $output;
-            }
-
-
-            /**
-             * Displays the specials available at the current location.
-             *
-             * @param string $location The ID of the current location.
-             * @param array $css_class_map The mapping of CSS classes for each day of the week.
-             * @return string The shortcode output of the specials section.
-             */
-            function ls_display_specials(string $location, array $css_class_map): string
-            {
-
-                global $ls_index_days_map;
-
-                // Opening column and ux_slider shortcodes
-                $output = '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
-                $output .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
-
-                $specials_query = new WP_Query(ls_specials_query_args($location));
+                $specials_query = new WP_Query($specials_args);
 
                 $specials_array = [];
 
@@ -402,7 +290,7 @@ Template name: Locations single.php
 
                         $specials_query->the_post();
 
-                        // Make the post data available for this specific post
+                        // Make the post data available
                         global $post;
 
                         // Map each day of the week to its corresponding sort index
@@ -416,20 +304,69 @@ Template name: Locations single.php
                         );
                     }
 
-                    // Sort all the fetched specials
-                    $sorted_specials = ls_sort_specials($specials_array);
+                    // Sort the specials array by the sort index
+                    usort($specials_array, function ($a, $b) {
+                        return $a['sort_index'] <=> $b['sort_index'];
+                    });
 
-                    // Build out the specials since we have posts
-                    $output .= getSpecialsShortcodes($sorted_specials, $css_class_map);
+                    // Loop through the sorted specials array and build the shortcode
+                    foreach ($specials_array as $special) {
 
+                        $post = $special['post'];
+                        setup_postdata($post);
 
+                        // Fetch special details
+                        $ls_special_image = get_the_post_thumbnail_url();
+                        $ls_special_link = get_the_permalink();
+                        $ls_specials_what_day = get_field('ls_specials_what_day');
+                        $ls_specials_title = get_field('ls_specials_title');
+                        $ls_specials_short_description = get_field('ls_specials_short_description');
+
+                        // Build the special shortcode
+                        $output .= '[row_inner]';
+                        $output .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card ' . $css_class_map[$ls_specials_what_day] . '"]';
+                        $output .= '[ux_html]';
+                        $output .= '<div class="special-box">' . $ls_specials_what_day . ' Deal</div>';
+                        $output .= '<a href="' . $ls_special_link . '" class="clickable-card-link"></a>';
+                        $output .= '[/ux_html]';
+
+                        // Add the special image if available
+                        if ($ls_special_image) {
+                            $output .= '[ux_image id="' . $ls_special_image . '" height="67%"]';
+                        }
+                        $output .= '[row_inner_1]';
+                        $output .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+                        $output .= '<h4>' . $ls_specials_title . '</h4>';
+                        $output .= $ls_specials_short_description;
+                        $output .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+                        $output .= '[/col_inner_1]';
+                        $output .= '[/row_inner_1]';
+                        $output .= '[/col_inner]';
+                        $output .= '[/row_inner]';
+                    }
                 } else {
-                    $output .= getDefaultOutput($css_class_map);
+                    // Build the special shortcode
+                    $output .= '[row_inner]';
+                    $output .= '[col_inner span__sm="12" bg_color="rgb(255,255,255)" class="special-clickable-card ' . $css_class_map['monday'] . '"]';
+                    $output .= '[ux_html]';
+                    $output .= '<div class="special-box">Coming Soon!</div>';
+                    $output .= '<a href="/contact" class="clickable-card-link"></a>';
+                    $output .= '[/ux_html]';
+
+                    $output .= '[ux_image id="645"]';
+                    $output .= '[row_inner_1]';
+                    $output .= '[col_inner_1 span__sm="12" padding="30px 30px 0px 30px"]';
+                    $output .= '<h4>Lorem Ipsum</h4>';
+                    $output .= '<p>No specials available. Please contact us for availability!</p>';
+                    $output .= '[button text="Learn More" color="alert" style="link" expand="0" icon="icon-angle-right"]';
+                    $output .= '[/col_inner_1]';
+                    $output .= '[/row_inner_1]';
+                    $output .= '[/col_inner]';
+                    $output .= '[/row_inner]';
                 }
 
                 wp_reset_postdata();
 
-                // Closing column and ux_slider shortcodes
                 $output .= '[/ux_slider]';
                 $output .= '[/col]';
 
@@ -468,7 +405,26 @@ Template name: Locations single.php
                 'everyday'  => 7
             );
 
+            /**
+             * Variables setup
+             * 
+             * Initializing variables to store location details, sanitizing the phone number, and fetching links to book an event or reserve a lane.
+             * 
+             * @var string  $ls_location_name              Text          The name of the location. 
+             * @var int     $ls_location_image             Image ID      The featured image of the location. 
+             * @var string  $ls_location_background_video  Text          The background video URL of the location. 
+             * @var int     $ls_location_background_image  Image ID      The background image of the location for mobile or if no video is available. 
+             * @var string  $ls_location_notice            Text          The Tooltip text to be displayed next to the hours table title. 
+             * @var string  $ls_location_address           URL           The address of the location. 
+             * @var int     $ls_location_phone             Number        The phone number of the location. 
+             * @var string  $ls_location_event_link        Text          The link to plan an event form. 
+             * @var string  $ls_location_lane_link         Text          The link to reserve a lane form. 
+             * @var array   $ls_location_hours             Repeater      The hours of the location. 
+             * @var array   $ls_attraction_availability    Relationship  The availability of attractions at the location. 
+             * @var array   $ls_special_availability       Relationship  The availability of specials at the location.
+             */
             $ls_location_name               = get_the_title();
+            $ls_location_image              = get_the_post_thumbnail_url();
             $ls_location_background_video   = get_field('ls_locations_background_video');
             $ls_location_background_image   = get_field('ls_locations_background_image');
             $ls_location_notice             = get_field('ls_locations_notice');
