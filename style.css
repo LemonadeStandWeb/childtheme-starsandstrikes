@@ -481,12 +481,21 @@ ul li.bullet-checkmark{
 	opacity: .8;
 }
 
+.image-first.maroon-overlay .img .overlay{
+	background-image: linear-gradient(to right bottom, #aa201b, #403379);
+	opacity: .8;
+}
+
 .clickable-card.image-first > .col-inner .img{
 	transition: .3s ease-in-out;
 }
 
-.clickable-card.image-first > .col-inner .img{
-	height: 200%;
+.clickable-card.image-first > .col-inner .fill img{
+	object-position: 50% 50%;
+}
+
+.clickable-card.image-first > .col-inner:hover .fill img{
+	object-position: 50% 0%;
 }
 
 .image-first.purple-overlay > .col-inner:hover{
@@ -495,6 +504,10 @@ ul li.bullet-checkmark{
 
 .image-first.orange-overlay > .col-inner:hover{
 	background-color: #F04C36 !important;
+}
+
+.image-first.maroon-overlay > .col-inner:hover{
+	background-color: #aa201b !important;
 }
 
 .image-first > .col-inner{
@@ -507,7 +520,6 @@ ul li.bullet-checkmark{
 }
 
 .clickable-card.clickable-card.image-first > .col-inner:hover .img{
-	height: 100%;
 	opacity: .5;
 }
 
