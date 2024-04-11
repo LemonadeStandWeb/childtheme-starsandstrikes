@@ -486,7 +486,7 @@ ul li.bullet-checkmark{
 }
 
 .clickable-card.image-first > .col-inner .img{
-	height: 210px;
+	height: 200%;
 }
 
 .image-first.purple-overlay > .col-inner:hover{
