@@ -610,6 +610,14 @@ ul li.bullet-checkmark{
 	color: #f68e3d;
 }
 
+.yellow-card .special-box:before, .special-clickable-card.yellow-card > .col-inner:hover{
+	background-color: #e3ae59 !important;;
+}
+
+.yellow-card .button{
+	color: #e3ae59;
+}
+
 .blue-card .special-box:before, .special-clickable-card.blue-card > .col-inner:hover{
 	background-color: #2792c9 !important;;
 }
