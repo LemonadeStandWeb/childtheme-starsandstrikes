@@ -383,7 +383,7 @@ Template name: Locations single.php
                 'monday'    => 'maroon-card',
                 'tuesday'   => 'purple-card',
                 'wednesday' => 'dark-blue-card',
-                'thursday'  => 'red-card',
+                'thursday'  => 'yellow-card',
                 'friday'    => 'blue-card',
                 'saturday'  => 'orange-card',
                 'everyday'  => 'gradient-card'
