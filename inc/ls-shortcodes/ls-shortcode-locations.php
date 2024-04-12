@@ -40,7 +40,7 @@ function ls_shortcode_locations()
             $shortcodes .= '[/ux_html]';
 
             if ($ls_location_building_image) {
-                $shortcodes .= '[ux_image id="' . $ls_location_building_image . '" height="75%" class="mb-0"]';
+                $shortcodes .= '[ux_image id="' . $ls_location_building_image . '" height="56.25%" class="mb-0"]';
             } else {
                 $shortcodes .= '[ux_image id="700" height="75%" class="mb-0"]';
             }

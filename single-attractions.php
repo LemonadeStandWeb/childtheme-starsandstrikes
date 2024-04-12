@@ -100,6 +100,7 @@ Template name: Attractions Single
             $shortcodes .= '[/col_inner]';
             $shortcodes .= '[/row_inner]';
             $shortcodes .= '[/col]';
+
             $shortcodes .= '[/row]';
             $shortcodes .= '[/section]';
 
