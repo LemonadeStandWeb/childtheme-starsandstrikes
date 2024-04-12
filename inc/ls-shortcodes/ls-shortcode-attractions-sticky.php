@@ -3,7 +3,7 @@
 /**
  * Display Attractions in gradient icon format within a sticky column
  */
-function ls_shortcode_locations_sticky(): bool|string
+function ls_shortcode_attractions_sticky(): bool|string
 {
     ob_start();
 
@@ -62,4 +62,4 @@ function ls_shortcode_locations_sticky(): bool|string
     return ob_get_clean();
 }
 
-add_shortcode('ls_locations_sticky', 'ls_shortcode_locations_sticky');
+add_shortcode('ls_attractions_sticky', 'ls_shortcode_attractions_sticky');
