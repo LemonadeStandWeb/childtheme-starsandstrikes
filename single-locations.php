@@ -15,19 +15,14 @@ Template name: Locations single.php
 
             <?php
             /**
-             * Displays the attractions available at the current location.
+             * Arguments array for fetching attractions available at the current location.
              *
-             * @param string $location the ID of the current location.
-             * @return string The shortcode output of the attractions section.
+             * @param string $location The location availability to filter attractions.
+             * @return array The arguments for querying attractions based on location availability.
              */
-            function ls_display_attractions($location)
+            function ls_attractions_args(string $location): array
             {
-
-                $output = '';
-                $output .= '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
-                $output .= '[row_inner class="location-activity-tiles"]';
-
-                $attractions_args = array(
+                return array(
                     'post_type' => 'attractions',
                     'posts_per_page' => -1,
                     'meta_query' => array(
@@ -38,9 +33,22 @@ Template name: Locations single.php
                         )
                     )
                 );
+            }
+
+            /**
+             * Displays the attractions available at the current location.
+             *
+             * @param string $location the ID of the current location.
+             * @return string The shortcode output of the attractions section.
+             */
+            function ls_display_attractions(string $location): string
+            {
+
+                $output = '[title style="bold" text="Activities Available" tag_name="h4" size="63"]';
+                $output .= '[row_inner class="location-activity-tiles"]';
 
                 // The query to fetch attractions
-                $attractions_query = new WP_Query($attractions_args);
+                $attractions_query = new WP_Query(ls_attractions_args($location));
 
                 // Begin building the attractions section if any attractions are available at the location.
                 if ($attractions_query->have_posts()) {
@@ -80,10 +88,10 @@ Template name: Locations single.php
              *
              * @return string The shortcodes for the hours table.
              */
-            function ls_display_hours_table()
+            function ls_display_hours_table(): string
             {
-                $output = '';
-                $output .= '<table class="hours__table">';
+                // Set up the hours table
+                $output = '<table class="hours__table">';
                 $output .= '<tbody>';
 
                 // Display Hours Table
@@ -125,9 +133,9 @@ Template name: Locations single.php
              * @param string $location_name The name of the location.
              * @param string $location_address The address of the location.
              * @param string $location_phone The phone number of the location.
-             * @return string The shortcode output for the hours column.
+             * @return string The shortcode output for the 'hours' column.
              */
-            function ls_display_hours_column($location_notice, $location_name, $location_address, $location_phone)
+            function ls_display_hours_column(string $location_notice, string $location_name, string $location_address, string $location_phone): string
             {
                 $output = '';
                 // Opening 4 column
@@ -189,15 +197,14 @@ Template name: Locations single.php
             }
 
             /**
-             * Displays the first returned promotion for a given location.
+             * Returns the first promotion found for this specific location.
              *
-             * @param string $location The location to fetch the promotion for.
-             * @return string The shortcode output of the first returned promotion.
+             * @param string $location The location to filter promotions by.
+             * @return array The arguments for querying promotions based on the specified location.
              */
-            function ls_display_featured_promotion($location)
+            function ls_promotions_args(string $location): array
             {
-
-                $promotions_args = array(
+                return array(
                     'post_type' => 'promotions',
                     'posts_per_page' => 1,
                     'meta_query' => array(
@@ -208,8 +215,18 @@ Template name: Locations single.php
                         )
                     )
                 );
+            }
 
-                $promotions_query = new WP_Query($promotions_args);
+            /**
+             * Displays the first returned promotion for a given location.
+             *
+             * @param string $location The location to fetch the promotion for.
+             * @return string The shortcode output of the first returned promotion.
+             */
+            function ls_display_featured_promotion(string $location): string
+            {
+
+                $promotions_query = new WP_Query(ls_promotions_args($location));
 
                 if ($promotions_query->have_posts()) {
                     $promotions_query->the_post();
@@ -220,8 +237,7 @@ Template name: Locations single.php
                     $ls_promotions_title = get_field('ls_promotions_title');
                     $ls_promotions_short_description = get_field('ls_promotions_short_description');
 
-                    $output = '';
-                    $output .= '[row h_align="center"]';
+                    $output = '[row h_align="center"]';
                     $output .= '[col span__sm="12" span__md="10" margin="-125px 0px 125px 0px" margin__sm="-125px 0px 76px 0px" bg_color="rgb(255,255,255)" bg_radius="10" depth="5" class="show-radius"]';
                     
                     $output .= '[row_inner style="collapse" v_align="equal" h_align="center"]';
@@ -245,7 +261,29 @@ Template name: Locations single.php
                     $output .= '[/row]';
 
                     return $output;
+                } else {
+                    return '';
                 }
+            }
+
+            /**
+             * Arguments array for fetching specials available at the current location.
+             *
+             * @param string $location The ID of the location.
+             * @return array The arguments array for WP_Query to fetch specials.
+             */
+            function ls_specials_args(string $location): array {
+                return array(
+                    'post_type' => 'specials',
+                    'posts_per_page' => -1,
+                    'meta_query' => array(
+                        array(
+                            'key' => 'ls_specials_locations',
+                            'value' => '"' . $location . '"',
+                            'compare' => 'LIKE'
+                        )
+                    )
+                );
             }
 
             /**
@@ -259,28 +297,15 @@ Template name: Locations single.php
              * @param array $css_class_map The CSS class map for the specials.
              * @return string The shortcode output of the specials.
              */
-            function ls_display_specials($location, $css_class_map)
+            function ls_display_specials(string $location, array $css_class_map): string
             {
 
                 global $ls_index_days_map;
 
-                $output = '';
-                $output .= '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
+                $output = '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
                 $output .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
 
-                $specials_args = array(
-                    'post_type' => 'specials',
-                    'posts_per_page' => -1,
-                    'meta_query' => array(
-                        array(
-                            'key' => 'ls_specials_locations',
-                            'value' => '"' . $location . '"',
-                            'compare' => 'LIKE'
-                        )
-                    )
-                );
-
-                $specials_query = new WP_Query($specials_args);
+                $specials_query = new WP_Query(ls_specials_args($location));
 
                 $specials_array = [];
 
