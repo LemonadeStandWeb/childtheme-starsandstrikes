@@ -15,20 +15,23 @@ Template name: Locations single.php
 
             <?php
             /**
-             * Arguments array for fetching attractions available at the current location.
+             * Get the arguments for querying posts based on the given parameters
              *
-             * @param string $location The location availability to filter attractions.
-             * @return array The arguments for querying attractions based on location availability.
+             * @param string $post_type The post type to query
+             * @param int $posts_per_page The number of posts to retrieve per page
+             * @param string $key The meta key to search for in the posts
+             * @param string $value The value to search for in the meta key
+             * @return array The array containing the query arguments
              */
-            function ls_attractions_args(string $location): array
+            function ls_get_post_args(string $post_type, int $posts_per_page, string $key, string $value): array
             {
                 return array(
-                    'post_type' => 'attractions',
-                    'posts_per_page' => -1,
+                    'post_type' => $post_type,
+                    'posts_per_page' => $posts_per_page,
                     'meta_query' => array(
                         array(
-                            'key' => 'ls_attraction_location_availability',
-                            'value' => '"' . $location . '"',
+                            'key' => $key,
+                            'value' => '"' . $value . '"',
                             'compare' => 'LIKE'
                         )
                     )
@@ -48,7 +51,7 @@ Template name: Locations single.php
                 $output .= '[row_inner class="location-activity-tiles"]';
 
                 // The query to fetch attractions
-                $attractions_query = new WP_Query(ls_attractions_args($location));
+                $attractions_query = new WP_Query(ls_get_post_args('attractions', -1, 'ls_attraction_location_availability', $location));
 
                 // Begin building the attractions section if any attractions are available at the location.
                 if ($attractions_query->have_posts()) {
@@ -197,27 +200,6 @@ Template name: Locations single.php
             }
 
             /**
-             * Returns the first promotion found for this specific location.
-             *
-             * @param string $location The location to filter promotions by.
-             * @return array The arguments for querying promotions based on the specified location.
-             */
-            function ls_promotions_args(string $location): array
-            {
-                return array(
-                    'post_type' => 'promotions',
-                    'posts_per_page' => 1,
-                    'meta_query' => array(
-                        array(
-                            'key' => 'ls_promotions_locations',
-                            'value' => '"' . $location . '"',
-                            'compare' => 'LIKE'
-                        )
-                    )
-                );
-            }
-
-            /**
              * Displays the first returned promotion for a given location.
              *
              * @param string $location The location to fetch the promotion for.
@@ -226,7 +208,7 @@ Template name: Locations single.php
             function ls_display_featured_promotion(string $location): string
             {
 
-                $promotions_query = new WP_Query(ls_promotions_args($location));
+                $promotions_query = new WP_Query(ls_get_post_args('promotions', 1, 'ls_promotions_locations', $location));
 
                 if ($promotions_query->have_posts()) {
                     $promotions_query->the_post();
@@ -260,30 +242,13 @@ Template name: Locations single.php
                     $output .= '[/col]';
                     $output .= '[/row]';
 
+                    wp_reset_postdata();
+
                     return $output;
                 } else {
+                    wp_reset_postdata();
                     return '';
                 }
-            }
-
-            /**
-             * Arguments array for fetching specials available at the current location.
-             *
-             * @param string $location The ID of the location.
-             * @return array The arguments array for WP_Query to fetch specials.
-             */
-            function ls_specials_args(string $location): array {
-                return array(
-                    'post_type' => 'specials',
-                    'posts_per_page' => -1,
-                    'meta_query' => array(
-                        array(
-                            'key' => 'ls_specials_locations',
-                            'value' => '"' . $location . '"',
-                            'compare' => 'LIKE'
-                        )
-                    )
-                );
             }
 
             /**
@@ -305,7 +270,7 @@ Template name: Locations single.php
                 $output = '[col span="7" span__sm="12" span__md="10" padding="0px 0px 0px 60px" padding__md="0px 0px 0px 0px"]';
                 $output .= '[ux_slider style="focus" slide_width="40%" slide_width__sm="100%" slide_width__md="60%" slide_align="left" hide_nav="true" nav_pos="outside" nav_style="simple" nav_color="dark" class="specials-slider custom-slider-btns"]';
 
-                $specials_query = new WP_Query(ls_specials_args($location));
+                $specials_query = new WP_Query(ls_get_post_args('specials', -1, 'ls_specials_locations', $location));
 
                 $specials_array = [];
 
@@ -433,20 +398,16 @@ Template name: Locations single.php
             /**
              * Variables setup
              * 
-             * Initializing variables to store location details, sanitizing the phone number, and fetching links to book an event or reserve a lane.
-             * 
              * @var string  $ls_location_name              Text          The name of the location. 
              * @var int     $ls_location_image             Image ID      The featured image of the location. 
              * @var string  $ls_location_background_video  Text          The background video URL of the location. 
              * @var int     $ls_location_background_image  Image ID      The background image of the location for mobile or if no video is available. 
-             * @var string  $ls_location_notice            Text          The Tooltip text to be displayed next to the hours table title. 
-             * @var string  $ls_location_address           URL           The address of the location. 
+             * @var string  $ls_location_notice            Text          The Tooltip text to be displayed next to the hours table title.
              * @var int     $ls_location_phone             Number        The phone number of the location. 
              * @var string  $ls_location_event_link        Text          The link to plan an event form. 
              * @var string  $ls_location_lane_link         Text          The link to reserve a lane form. 
-             * @var array   $ls_location_hours             Repeater      The hours of the location. 
-             * @var array   $ls_attraction_availability    Relationship  The availability of attractions at the location. 
-             * @var array   $ls_special_availability       Relationship  The availability of specials at the location.
+             * @var array   $ls_location_hours             Repeater      The hours of the location.
+             * @var string  $current_location                            The ID of the current post.
              */
             $ls_location_name               = get_the_title();
             $ls_location_image              = get_the_post_thumbnail_url();
@@ -459,8 +420,6 @@ Template name: Locations single.php
             $ls_location_event_link         = get_field('ls_locations_plan_an_event_link');
             $ls_location_lane_link          = get_field('ls_locations_reserve_a_lane_link');
             $ls_location_hours              = get_field('ls_locations_hours');
-            $ls_attraction_availability     = get_field('ls_attraction_location_availability');
-            $ls_special_availability        = get_field('ls_specials_locations');
             $current_location               = get_the_ID();
 
             // Initialize shortcode variable as empty and start building the shortcodes
