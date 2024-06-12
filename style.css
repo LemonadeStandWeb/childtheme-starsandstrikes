@@ -90,11 +90,6 @@ Version: 3.0
 	color: var(--ltyellow);
 }
 
-.select-button {
-	font-size: 42px;
-	font-family: 'Zilla Slab';
-}
-
 .simple .icon-box-img{
 	margin-bottom: 0;
 }
@@ -956,4 +951,57 @@ header .has-dropdown a:hover {
 
 header .row-divided>.col+.col:not(.large-12){
 	border-color: hsla(0,0%,100%,.15);
+}
+
+.tippy-box {
+	background-color: #1C457A;
+}
+.tippy-arrow{
+	color: #1C457A;
+}
+.select-button {
+	font-size: 38px;
+	font-family: 'Zilla Slab';
+}
+.custom-radio{
+	position: relative;
+	padding: 7px 10px;
+}
+.custom-radio:not(.disabled):hover{
+	background-color: #050d32;
+	border-radius: 5px;
+}
+.custom-radio:not(.disabled):hover *{
+	cursor: pointer;
+}
+.custom-radio input{
+	opacity: 0;
+}
+.custom-radio.disabled{
+	opacity: .3;
+}
+.custom-radio.disabled *{
+	cursor: no-drop;
+}
+.radio-image{
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 28px;
+	height: 28px;
+	display: inline-block;
+	filter: invert(100%) sepia(98%) saturate(0%) hue-rotate(325deg) brightness(102%) contrast(105%);
+}
+.location-image{
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+}
+.btn-location{
+    max-width: 550px;
+    overflow-x: hidden;
+    text-wrap: nowrap;
 }
