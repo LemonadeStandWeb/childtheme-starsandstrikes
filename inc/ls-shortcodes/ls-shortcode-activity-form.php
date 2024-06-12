@@ -83,7 +83,7 @@ function activities_handler( $atts, $content = null, $tag = '' ) {
     $stack .= '[button text="'.$attractions[0]['title'].'" style="link" icon="icon-angle-down" color="primary" class="select-button text-yellow btn-activity" icon_pos="right"]';
     $stack .= '[ux_text]<p class="my-0" style=font-size:1.2em;><b>in</b><p>[/ux_text]';
     $stack .= '[button text="'.$attractions[0]['locations'][0]['title'].'" style="link" icon="icon-angle-down" color="primary" class="select-button text-yellow btn-location" icon_pos="right"]';
-    $stack .= '[button text="GO" color="primary" class="white btn-go" link="'.$attractions[0]['locations'][0]['link'].'"]';
+    $stack .= '[button text="GO" color="primary" class="btn-go" link="'.$attractions[0]['locations'][0]['link'].'"]';
     $stack .= '[/ux_stack]';
     ?>
 
