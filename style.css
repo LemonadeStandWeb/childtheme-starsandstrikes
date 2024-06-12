@@ -1029,7 +1029,7 @@ header .row-divided>.col+.col:not(.large-12){
 
 /* colors */
 
-.button.primary:not(.is-link):before{
+.button.primary:not(.is-link):not(.is-outline):before{
 	background-image: linear-gradient(90deg, #2eb6ec, #403379);
 }
 
@@ -1037,7 +1037,7 @@ header .row-divided>.col+.col:not(.large-12){
 	border-color: #2eb6ec;
 }
 
-.button.secondary:not(.is-link):before{
+.button.secondary:not(.is-link):not(.is-outline):before{
 	background-image: linear-gradient(90deg, #1c457a, #4571db);
 }
 
@@ -1045,7 +1045,7 @@ header .row-divided>.col+.col:not(.large-12){
 	border-color: #4571db;
 }
 
-.button.success:not(.is-link):before{
+.button.success:not(.is-link):not(.is-outline):before{
 	background-image: linear-gradient(90deg, #F2C116, #F04C36);
 }
 
@@ -1053,7 +1053,7 @@ header .row-divided>.col+.col:not(.large-12){
 	border-color: var(--yellow);
 }
 
-.button.alert:not(.is-link):before{
+.button.alert:not(.is-link):not(.is-outline):before{
 	background-image: linear-gradient(90deg, #aa201b, #403379);
 }
 
