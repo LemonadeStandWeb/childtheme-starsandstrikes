@@ -230,8 +230,13 @@ ul li.bullet-checkmark{
 .gform_button, .gform_next_button{
 	background-image: linear-gradient(to right bottom, #FE801F, #F04C36, #aa201b);
 	box-shadow: 0px 5px 18px 1px rgba(254, 128, 31, .8);
-	border: none;
+	border-color: var(--orange) !important;
 }
+
+.gform_button:hover, .gform_next_button:hover{
+	border-color: var(--yellow) !important;
+}
+
 .gform_button::after, .gform_next_button::after{
 	display: block;
 	content: '';
@@ -1026,6 +1031,7 @@ header .row-divided>.col+.col:not(.large-12){
 	height: 100%;
 	transition: .2s ease-in-out;
 }
+
 
 /* colors */
 
